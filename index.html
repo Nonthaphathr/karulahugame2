@@ -16,6 +16,7 @@
             user-select: none;
         }
 
+        /* --- SCREEN LAYOUT --- */
         .screen {
             position: absolute;
             width: 100%;
@@ -25,90 +26,69 @@
             justify-content: center;
             align-items: center;
             z-index: 10;
+            /* แก้ไข: เพิ่ม Padding ด้านล่าง เพื่อดันกล่องขึ้นหนีเครดิต */
+            padding-bottom: 40px; 
+            box-sizing: border-box;
         }
         .active { display: flex; }
 
         /* พื้นหลัง */
         .game-bg {
-            position: absolute;
-            width: 100%;
-            height: 100%;
+            position: absolute; width: 100%; height: 100%;
             background-image: url('https://nonthaphathr.github.io/uploadimg/bgrain2.png');
-            background-size: cover;
-            background-position: center;
-            z-index: 0;
+            background-size: cover; background-position: center; z-index: 0;
         }
         .bg-overlay {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.2);
-            z-index: 1;
+            position: absolute; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.3); z-index: 1;
         }
 
-        /* HUD */
-        .hud {
+        /* --- RAIN ANIMATION (หน้าลงทะเบียน) --- */
+        .rain-front {
+            position: absolute; left: 0; top: 0; width: 100%; height: 100%;
+            z-index: 5; pointer-events: none; overflow: hidden;
+        }
+        .raindrop {
             position: absolute;
-            top: 15px;
-            width: 90%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 20px;
-            font-weight: bold;
-            color: #fff;
-            text-shadow: 2px 2px 4px #000;
-            z-index: 20;
+            background-color: rgba(255, 255, 255, 0.6);
+            width: 2px; height: 15px;
+            top: -20px;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            to { transform: translateY(105vh); }
+        }
+
+        /* --- UI ELEMENTS --- */
+        .hud {
+            position: absolute; top: 15px; width: 90%;
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 20px; font-weight: bold; color: #fff;
+            text-shadow: 2px 2px 4px #000; z-index: 20;
         }
         .score-box {
-            background: rgba(0,0,0,0.6);
-            padding: 5px 15px;
-            border-radius: 30px;
-            border: 2px solid rgba(255,255,255,0.3);
-            display: flex; gap: 15px;
+            background: rgba(0,0,0,0.6); padding: 5px 15px; border-radius: 30px;
+            border: 2px solid rgba(255,255,255,0.3); display: flex; gap: 15px;
         }
         .btn-stop {
             background: #D32F2F; color: white; border: 2px solid white;
-            width: 35px; height: 35px; border-radius: 50%;
-            font-weight: bold; font-size: 18px; cursor: pointer;
-            display: flex; justify-content: center; align-items: center;
+            width: 35px; height: 35px; border-radius: 50%; font-weight: bold; font-size: 18px;
+            cursor: pointer; display: flex; justify-content: center; align-items: center;
         }
 
-        /* ภารกิจ */
+        /* Mission & Special */
         #mission-display {
-            position: absolute;
-            top: 70px;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-size: 24px;
-            font-weight: 800;
-            color: #333;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-            z-index: 20;
-            border: 5px solid;
-            text-align: center;
-            min-width: 200px;
-            transition: all 0.3s;
+            position: absolute; top: 70px; background: rgba(255, 255, 255, 0.95);
+            padding: 10px 20px; border-radius: 50px; font-size: 24px; font-weight: 800;
+            color: #333; box-shadow: 0 5px 15px rgba(0,0,0,0.4); z-index: 20;
+            border: 5px solid; text-align: center; min-width: 200px; transition: all 0.3s;
         }
-
-        /* ภารกิจพิเศษ */
         #special-mission-box {
-            position: absolute;
-            top: 140px;
-            background: rgba(0, 0, 0, 0.65); 
-            color: #FFD700;
-            padding: 10px;
-            border-radius: 15px;
-            border: 2px solid rgba(255, 215, 0, 0.7);
-            z-index: 25;
-            text-align: center;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            width: 80%;
-            max-width: 280px;
-            backdrop-filter: blur(2px);
+            position: absolute; top: 140px; background: rgba(0, 0, 0, 0.65); 
+            color: #FFD700; padding: 10px; border-radius: 15px;
+            border: 2px solid rgba(255, 215, 0, 0.7); z-index: 25; text-align: center;
+            display: none; flex-direction: column; align-items: center;
+            width: 80%; max-width: 280px; backdrop-filter: blur(2px);
         }
         .sp-title { font-size: 18px; font-weight: bold; text-transform: uppercase; margin-bottom: 5px; animation: blink 1s infinite; }
         @keyframes blink { 50% { opacity: 0.5; } }
@@ -116,19 +96,14 @@
         .sp-bar-bg { width: 100%; height: 6px; background: rgba(255,255,255,0.2); border-radius: 3px; margin-top: 5px; overflow: hidden; }
         .sp-bar-fill { height: 100%; background: #FFD700; width: 100%; transition: width 0.1s linear; }
 
-        /* ตัวละคร */
+        /* Player & Items */
         #player {
             position: absolute; bottom: 20px; width: 100px; height: 100px;
             background-image: url('https://nonthaphathr.github.io/uploadimg/student2.png'); 
             background-size: contain; background-repeat: no-repeat; background-position: center bottom;
-            z-index: 15; transition: transform 0.1s;
-            filter: drop-shadow(0 5px 5px rgba(0,0,0,0.5));
+            z-index: 15; transition: transform 0.1s; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.5));
         }
-
-        /* Items */
-        .falling-obj {
-            position: absolute; z-index: 10; display: flex; justify-content: center; align-items: center;
-        }
+        .falling-obj { position: absolute; z-index: 10; display: flex; justify-content: center; align-items: center; }
         .word-item {
             padding: 8px 16px; border-radius: 15px; font-weight: 800; font-size: 24px;
             color: #333; background-color: white; border: 3px solid #00B0FF;
@@ -156,47 +131,44 @@
             100% { transform: translateY(-80px) scale(1.5); opacity: 0; }
         }
 
-        #slow-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 176, 255, 0.2); pointer-events: none; display: none; z-index: 5; mix-blend-mode: screen;
+        #slow-overlay, #flash-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50;
         }
-        #flash-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: white; opacity: 0; pointer-events: none; z-index: 50; transition: opacity 0.1s;
-        }
+        #slow-overlay { background: rgba(0, 176, 255, 0.2); display: none; mix-blend-mode: screen; }
+        #flash-overlay { background: white; opacity: 0; transition: opacity 0.1s; }
 
-        /* UI Boxes */
+        /* --- REGISTER BOX --- */
         .box-style {
             background: rgba(255, 255, 255, 0.95); padding: 25px; border-radius: 25px;
             text-align: center; width: 85%; max-width: 380px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.6); z-index: 30; border: 4px solid #00B0FF;
-            max-height: 90vh; overflow-y: auto;
+            max-height: 85vh; overflow-y: auto; position: relative;
         }
-        
-        .logo-img {
-            max-width: 150px; margin-bottom: 10px; display: block; margin-left: auto; margin-right: auto;
-        }
+        .logo-img { max-width: 150px; margin-bottom: 5px; display: block; margin-left: auto; margin-right: auto; }
         
         input, select, button {
-            width: 100%; padding: 12px; margin: 8px 0; border-radius: 12px;
+            width: 100%; padding: 12px; margin: 6px 0; border-radius: 12px;
             border: 2px solid #ddd; font-family: 'Sarabun'; font-size: 16px; box-sizing: border-box;
         }
-        button { border: none; cursor: pointer; font-weight: bold; margin-top: 15px; }
+        button { border: none; cursor: pointer; font-weight: bold; margin-top: 10px; }
         .btn-start { background: linear-gradient(to right, #00B0FF, #0081CB); color: white; }
         .btn-guest { background: #546E7A; color: white; }
 
-        /* Tutorial Grid */
-        .tut-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 10px; text-align: left; margin-top: 10px;
+        /* Counter */
+        .visitor-counter {
+            font-size: 12px; color: #666; margin-top: 10px; text-align: right;
         }
-        .tut-item {
-            background: #f9f9f9; padding: 5px; border-radius: 10px; display: flex; align-items: center; font-size: 13px;
-        }
-        .tut-icon { font-size: 24px; margin-right: 8px; width: 30px; text-align: center; }
 
+        /* Tutorial */
+        .tut-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; text-align: left; margin-top: 10px; }
+        .tut-item { background: #f9f9f9; padding: 5px; border-radius: 10px; display: flex; align-items: center; font-size: 12px; }
+        .tut-icon { font-size: 20px; margin-right: 5px; width: 25px; text-align: center; }
+
+        /* Credit - Fixed Bottom */
         .credit {
-            position: absolute; bottom: 5px; width: 100%; text-align: center;
-            color: rgba(255,255,255,0.7); font-size: 12px; text-shadow: 1px 1px 2px black; z-index: 100;
+            position: fixed; bottom: 5px; width: 100%; text-align: center;
+            color: rgba(255,255,255,0.7); font-size: 12px;
+            text-shadow: 1px 1px 2px black; z-index: 100; pointer-events: none;
         }
     </style>
 </head>
@@ -205,21 +177,20 @@
     <div class="credit">พัฒนาโดย ครูนนทพัทธ์ หิรัญเรือง</div>
     <div class="game-bg"></div>
     <div class="bg-overlay"></div>
-    <div id="slow-overlay"></div>
+    <div class="rain-front" id="rain-container"></div> <div id="slow-overlay"></div>
     <div id="flash-overlay"></div>
 
     <audio id="bgm" loop>
         <source src="https://nonthaphathr.github.io/uploadimg/rainbgsong.mp3" type="audio/mpeg">
     </audio>
     <audio id="end-sfx">
-        <source src="https://nonthaphathr.github.io/uploadimg/yehwinner.mp3" type="audio/mpeg">
+        <source src="https://nonthaphathr.github.io/uploadimg/yehwinner.png" type="audio/mpeg">
     </audio>
 
     <div id="screen-register" class="screen active">
         <div class="box-style">
             <img src="https://nonthaphathr.github.io/uploadimg/logokhampraphan-non.png" alt="Logo" class="logo-img">
-            
-            <h2 style="color:#0081CB; margin:0 0 10px 0;">⛈️ ฝ่าพายุครุ-ลหุ</h2>
+            <h2 style="color:#0081CB; margin:0 0 5px 0; font-size: 22px;">⛈️ ฝ่าพายุครุ-ลหุ</h2>
             
             <input type="text" id="p-name" placeholder="ชื่อ-นามสกุล">
             <select id="p-class">
@@ -242,23 +213,25 @@
             
             <button class="btn-start" onclick="showTutorial(true)">ลงทะเบียนเริ่มเล่น</button>
             <button class="btn-guest" onclick="showTutorial(false)">เล่นแบบไม่ลงทะเบียน</button>
+
+            <div class="visitor-counter">
+                เข้าชม: <span id="visit-count">...</span> ครั้ง
+            </div>
         </div>
     </div>
 
     <div id="screen-tutorial" class="screen">
         <div class="box-style">
             <h2 style="color:#FF9800; margin-top:0;">📖 วิธีเล่น & ไอเทม</h2>
-            <p style="font-size:14px; color:#555;">ลากตัวละครไปรับคำให้ตรงกับโจทย์!</p>
-            
+            <p style="font-size:14px; color:#555; margin:5px;">ลากตัวละครไปรับคำให้ตรงกับโจทย์!</p>
             <div class="tut-grid">
                 <div class="tut-item"><span class="tut-icon">📝</span><div>คำถูก +10<br>คำผิด -5</div></div>
                 <div class="tut-item"><span class="tut-icon">🌟</span><div>โบนัส +20</div></div>
-                <div class="tut-item"><span class="tut-icon">💣</span><div>ระเบิด -10<br>(มึนงง)</div></div>
+                <div class="tut-item"><span class="tut-icon">💣</span><div>ระเบิด -10</div></div>
                 <div class="tut-item"><span class="tut-icon">⏳</span><div>ช้าลง 5 วิ</div></div>
-                <div class="tut-item"><span class="tut-icon">⚡</span><div>เก็บ<b>ตัวถูก</b><br>หมดจอ</div></div>
-                <div class="tut-item"><span class="tut-icon">🌩️</span><div>เก็บ<b>ตัวผิด</b><br>หมดจอ</div></div>
+                <div class="tut-item"><span class="tut-icon">⚡</span><div>เก็บ<b>ตัวถูก</b>หมด</div></div>
+                <div class="tut-item"><span class="tut-icon">🌩️</span><div>เก็บ<b>ตัวผิด</b>หมด</div></div>
             </div>
-
             <button class="btn-start" style="font-size:20px; padding:15px;" onclick="realStartGame()">🚀 พร้อมแล้ว! ลุยเลย</button>
         </div>
     </div>
@@ -273,7 +246,6 @@
         </div>
         
         <div id="mission-display">เก็บคำครุ!</div>
-        
         <div id="special-mission-box">
             <div class="sp-title">⚡ ภารกิจด่วน! ⚡</div>
             <div class="sp-req" id="sp-req-text">ครุ 2 | ลหุ 1</div>
@@ -290,34 +262,48 @@
             <p>คะแนนรวม</p>
             <div style="font-size:70px; color:#00B0FF; font-weight:800; text-shadow:2px 2px 0 #eee;" id="final-score">0</div>
             <div id="player-info" style="text-align:left; background:#f0f0f0; padding:15px; border-radius:10px; margin-bottom:20px;"></div>
+            <div id="save-status" style="font-size:14px; color:#666; margin-bottom:10px;"></div>
             <button class="btn-start" onclick="location.reload()">เล่นใหม่อีกครั้ง</button>
         </div>
     </div>
 
     <script>
-        // --- Sound System ---
+        // --- 1. CONFIGURATION ---
+        // *** ครูต้องเอา URL ของ Web App จาก Google Script มาใส่ตรงนี้ ***
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyr0MOAOEpA8PsXOdQ7SMVeGS5prOD91KoUcjklYdU08kk4UdX1f9OWo47-LxTKpe-z/exec'; 
+        
+        // --- 2. SETUP & INIT ---
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        function playTone(freq, type, duration) {
-            if (audioCtx.state === 'suspended') audioCtx.resume();
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.type = type;
-            osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-            gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration);
-            osc.connect(gain); gain.connect(audioCtx.destination);
-            osc.start(); osc.stop(audioCtx.currentTime + duration);
-        }
-        function playSFX(name) {
-            switch(name) {
-                case 'collect': playTone(600, 'sine', 0.1); setTimeout(()=>playTone(800, 'sine', 0.1), 50); break;
-                case 'bad': playTone(150, 'sawtooth', 0.3); break;
-                case 'bonus': playTone(400, 'square', 0.1); setTimeout(()=>playTone(600, 'square', 0.1), 100); setTimeout(()=>playTone(1000, 'square', 0.2), 200); break;
-                case 'thunder': playTone(50, 'sawtooth', 0.5); break;
+        
+        // Init Rain & Counter
+        window.onload = function() {
+            createRain();
+            updateVisitCount();
+        };
+
+        function createRain() {
+            const container = document.getElementById('rain-container');
+            for(let i=0; i<50; i++) {
+                const drop = document.createElement('div');
+                drop.className = 'raindrop';
+                drop.style.left = Math.random() * 100 + 'vw';
+                drop.style.animationDuration = (Math.random() * 1 + 0.5) + 's';
+                drop.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(drop);
             }
         }
 
-        // --- Data ---
+        function updateVisitCount() {
+            // ใช้ CounterAPI (namespace ต้องไม่ซ้ำใคร ผมตั้งให้เป็น nonthaphathr-garulahu-v1)
+            fetch('https://api.counterapi.dev/v1/nonthaphathr-garulahu-v1/visits/up')
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('visit-count').innerText = data.count;
+                })
+                .catch(err => console.log('Counter Error:', err));
+        }
+
+        // --- 3. GAME DATA & STATE ---
         const garhuWords = ["ฟ้า", "กู", "มี", "บ้าน", "รถ", "กิน", "รัก", "เมือง", "เขา", "พี่", "ใจ", "พวก", "โลก", "เป็น", "ดอก"];
         const lahuWords = ["จะ", "ก็", "นะ", "มิ", "สิ", "ธุ", "บิ", "ดิ", "ติ", "ปริ", "ผิ", "หุ", "กะ", "ทะ", "พะ"];
 
@@ -330,7 +316,7 @@
         let playerInfo = {};
         let specialMissionInterval;
 
-        // --- Step 1: Prepare Player Info & Show Tutorial ---
+        // --- 4. GAME FLOW ---
         function showTutorial(isRegistered) {
             if (isRegistered) {
                 const name = document.getElementById('p-name').value;
@@ -345,23 +331,19 @@
             const selectedTime = document.getElementById('p-time').value;
             gameState.initialTime = parseInt(selectedTime);
             
-            // Switch Screen
             document.getElementById('screen-register').classList.remove('active');
             document.getElementById('screen-tutorial').classList.add('active');
         }
 
-        // --- Step 2: Real Start Game ---
         function realStartGame() {
-            // Play BGM
             const bgm = document.getElementById('bgm');
             bgm.volume = 0.4;
             bgm.play().catch(e => console.log("Audio play failed"));
 
-            // Switch Screen
             document.getElementById('screen-tutorial').classList.remove('active');
             document.getElementById('screen-game').classList.add('active');
+            document.getElementById('rain-container').style.display = 'none'; // ซ่อนฝนหน้าแรก
 
-            // Reset Logic
             gameState.timeLeft = gameState.initialTime;
             gameState.score = 0;
             gameState.isPlaying = true;
@@ -379,7 +361,6 @@
             changeMission();
             requestAnimationFrame(gameLoop);
             
-            // Main Timer
             const timerInt = setInterval(() => {
                 if(!gameState.isPlaying) { clearInterval(timerInt); return; }
                 gameState.timeLeft--;
@@ -395,6 +376,61 @@
 
         function confirmEndGame() { if(confirm("ต้องการจบเกมทันทีหรือไม่?")) endGame(); }
 
+        function endGame() {
+            gameState.isPlaying = false;
+            document.getElementById('bgm').pause();
+            document.getElementById('end-sfx').play().catch(e=>console.log("End sound fail"));
+
+            clearInterval(specialMissionInterval);
+            document.getElementById('screen-game').classList.remove('active');
+            document.getElementById('screen-end').classList.add('active');
+            document.getElementById('rain-container').style.display = 'block'; // ฝนกลับมาตกหน้าจบ
+
+            document.getElementById('final-score').innerText = gameState.score;
+            document.getElementById('player-info').innerHTML = `
+                <b>ชื่อ:</b> ${playerInfo.name}<br>
+                <b>ชั้น:</b> ${playerInfo.cls} <b>เลขที่:</b> ${playerInfo.num}
+            `;
+
+            // บันทึกคะแนนลง Google Sheets
+            if (playerInfo.name !== "ผู้มาเยือน") {
+                saveScoreToSheets();
+            }
+        }
+
+        function saveScoreToSheets() {
+            const statusDiv = document.getElementById('save-status');
+            statusDiv.innerText = "กำลังบันทึกคะแนน...";
+            
+            if (GOOGLE_SCRIPT_URL === 'YOUR_GOOGLE_SCRIPT_WEB_APP_URL_HERE') {
+                statusDiv.innerText = "⚠️ ยังไม่ได้เชื่อมต่อ Google Sheets";
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('name', playerInfo.name);
+            formData.append('class', playerInfo.cls);
+            formData.append('number', playerInfo.num);
+            formData.append('score', gameState.score);
+            formData.append('timestamp', new Date().toLocaleString());
+
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                statusDiv.innerText = "✅ บันทึกคะแนนเรียบร้อย!";
+                statusDiv.style.color = "green";
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                statusDiv.innerText = "❌ บันทึกไม่สำเร็จ";
+                statusDiv.style.color = "red";
+            });
+        }
+
+        // --- 5. GAME LOGIC ---
         function changeMission() {
             const types = ["garhu", "lahu"];
             gameState.mission = types[Math.floor(Math.random() * types.length)];
@@ -405,8 +441,8 @@
                 box.innerText = "🎯 เก็บคำลหุ"; box.style.color = "#00C853"; box.style.borderColor = "#00C853";
             }
         }
-
-        // --- Special Mission ---
+        
+        // Special Mission
         function startSpecialMission() {
             const pattern = Math.floor(Math.random() * 3);
             let g = 0, l = 0;
@@ -415,7 +451,6 @@
             updateSpecialMissionUI();
             document.getElementById('mission-display').style.opacity = '0.3';
             document.getElementById('special-mission-box').style.display = 'flex';
-            
             if(specialMissionInterval) clearInterval(specialMissionInterval);
             specialMissionInterval = setInterval(() => {
                 if(!gameState.isPlaying || !gameState.specialMission.active) { clearInterval(specialMissionInterval); return; }
@@ -429,9 +464,7 @@
             const sm = gameState.specialMission;
             const gLeft = sm.reqGarhu - sm.curGarhu;
             const lLeft = sm.reqLahu - sm.curLahu;
-            let text = "";
-            if (gLeft > 0) text += `ครุ ${gLeft} `;
-            if (lLeft > 0) text += `ลหุ ${lLeft}`;
+            let text = ""; if (gLeft > 0) text += `ครุ ${gLeft} `; if (lLeft > 0) text += `ลหุ ${lLeft}`;
             if (gLeft <= 0 && lLeft <= 0) text = "สำเร็จ!";
             document.getElementById('sp-req-text').innerText = text;
         }
@@ -457,28 +490,11 @@
             return false;
         }
 
-        // --- Game Logic ---
+        // Game Loop & Items
         function updateHUD() {
             document.getElementById('time-display').innerText = gameState.timeLeft;
             document.getElementById('score-display').innerText = gameState.score;
         }
-
-        function endGame() {
-            gameState.isPlaying = false;
-            // Stop BGM & Play End SFX
-            document.getElementById('bgm').pause();
-            document.getElementById('end-sfx').play().catch(e=>console.log("End sound fail", e));
-
-            clearInterval(specialMissionInterval);
-            document.getElementById('screen-game').classList.remove('active');
-            document.getElementById('screen-end').classList.add('active');
-            document.getElementById('final-score').innerText = gameState.score;
-            document.getElementById('player-info').innerHTML = `
-                <b>ชื่อ:</b> ${playerInfo.name}<br>
-                <b>ชั้น:</b> ${playerInfo.cls} <b>เลขที่:</b> ${playerInfo.num}
-            `;
-        }
-
         const playerElem = document.getElementById('player');
         document.addEventListener('touchmove', movePlayer, {passive: false});
         document.addEventListener('mousemove', movePlayer);
@@ -489,9 +505,8 @@
             let percent = (clientX / window.innerWidth) * 100;
             if(percent < 10) percent = 10; if(percent > 90) percent = 90;
             gameState.playerX = percent;
-            playerElem.style.left = `calc(${percent}% - 60px)`;
+            playerElem.style.left = `calc(${percent}% - 50px)`;
         }
-
         function gameLoop(time) {
             if(!gameState.isPlaying) return;
             if(time - gameState.lastSpawn > gameState.spawnRate) {
@@ -500,7 +515,6 @@
             updateItems();
             requestAnimationFrame(gameLoop);
         }
-
         function spawnItem() {
             const chance = Math.random();
             let type, content, className, specificClass;
@@ -522,7 +536,6 @@
             document.getElementById('game-area').appendChild(el);
             gameState.fallingItems.push({ el: el, y: -10, type: type, active: true });
         }
-
         function updateItems() {
             const playerRect = playerElem.getBoundingClientRect();
             const pBox = { l: playerRect.left + 30, r: playerRect.right - 30, t: playerRect.top + 40, b: playerRect.bottom };
@@ -536,13 +549,11 @@
                 if (pBox.l < itemRect.right && pBox.r > itemRect.left && pBox.t < itemRect.bottom && pBox.b > itemRect.top) { handleCollect(item); }
             });
         }
-
         function triggerFlash(color) {
             const flash = document.getElementById('flash-overlay');
             flash.style.background = color; flash.style.opacity = '0.8';
             setTimeout(() => { flash.style.opacity = '0'; }, 200);
         }
-
         function collectAllOnScreen(isBonusMode) {
             let count = 0; const targetType = gameState.mission;
             gameState.fallingItems.forEach(item => {
@@ -560,7 +571,6 @@
             });
             return count;
         }
-
         function handleCollect(item) {
             item.active = false; item.el.remove();
             if (item.type === "bonus") { gameState.score += 20; playSFX('bonus'); showPopup("✨+20", item.el.style.left, item.el.style.top, "#FFD700"); return; }
@@ -576,17 +586,30 @@
             else { if(gameState.score > 0) gameState.score -= 5; playSFX('bad'); showPopup("❌-5", item.el.style.left, item.el.style.top, "#D32F2F"); playerElem.style.opacity = "0.5"; setTimeout(() => playerElem.style.opacity = "1", 200); }
             updateHUD();
         }
-
         function activateSlowMotion() {
             if (gameState.slowMotionTimer) clearTimeout(gameState.slowMotionTimer);
             gameState.isSlowMotion = true; document.getElementById('slow-overlay').style.display = 'block';
             gameState.slowMotionTimer = setTimeout(() => { gameState.isSlowMotion = false; document.getElementById('slow-overlay').style.display = 'none'; }, 5000);
         }
-
         function showPopup(text, x, y, color) {
             const pop = document.createElement('div'); pop.className = 'score-popup'; pop.innerText = text;
             pop.style.left = x; pop.style.top = y; pop.style.color = color;
             document.getElementById('game-area').appendChild(pop); setTimeout(() => pop.remove(), 800);
+        }
+        function playTone(freq, type, duration) {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
+            osc.type = type; osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+            gain.gain.setValueAtTime(0.1, audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration);
+            osc.connect(gain); gain.connect(audioCtx.destination); osc.start(); osc.stop(audioCtx.currentTime + duration);
+        }
+        function playSFX(name) {
+            switch(name) {
+                case 'collect': playTone(600, 'sine', 0.1); setTimeout(()=>playTone(800, 'sine', 0.1), 50); break;
+                case 'bad': playTone(150, 'sawtooth', 0.3); break;
+                case 'bonus': playTone(400, 'square', 0.1); setTimeout(()=>playTone(600, 'square', 0.1), 100); setTimeout(()=>playTone(1000, 'square', 0.2), 200); break;
+                case 'thunder': playTone(50, 'sawtooth', 0.5); break;
+            }
         }
     </script>
 </body>
