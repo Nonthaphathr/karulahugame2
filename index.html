@@ -16,7 +16,6 @@
             user-select: none;
         }
 
-        /* หน้าจอต่างๆ */
         .screen {
             position: absolute;
             width: 100%;
@@ -29,7 +28,7 @@
         }
         .active { display: flex; }
 
-        /* พื้นหลังหน้าเกม */
+        /* พื้นหลัง */
         .game-bg {
             position: absolute;
             width: 100%;
@@ -43,7 +42,7 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.3); /* มืดลงนิดนึงให้อ่านง่าย */
+            background: rgba(0, 0, 0, 0.3);
             z-index: 1;
         }
 
@@ -54,18 +53,41 @@
             width: 90%;
             display: flex;
             justify-content: space-between;
+            align-items: center;
             font-size: 22px;
             font-weight: bold;
             color: #fff;
             text-shadow: 2px 2px 4px #000;
             z-index: 20;
-            background: rgba(0,0,0,0.5);
-            padding: 10px 20px;
+        }
+        
+        .score-box {
+            background: rgba(0,0,0,0.6);
+            padding: 8px 20px;
             border-radius: 30px;
             border: 2px solid rgba(255,255,255,0.3);
+            display: flex;
+            gap: 15px;
         }
 
-        /* ภารกิจ */
+        .btn-stop {
+            background: #D32F2F;
+            color: white;
+            border: 2px solid white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 5px rgba(0,0,0,0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .btn-stop:active { transform: scale(0.9); }
+
+        /* ภารกิจหลัก */
         #mission-display {
             position: absolute;
             top: 80px;
@@ -77,16 +99,45 @@
             color: #333;
             box-shadow: 0 5px 15px rgba(0,0,0,0.4);
             z-index: 20;
-            animation: pulse 2s infinite;
             border: 5px solid;
             text-align: center;
             min-width: 220px;
+            transition: all 0.3s;
         }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+
+        /* ภารกิจพิเศษ (Special Mission Box) */
+        #special-mission-box {
+            position: absolute;
+            top: 150px;
+            background: linear-gradient(135deg, #212121, #000);
+            color: #FFD700;
+            padding: 15px;
+            border-radius: 15px;
+            border: 3px solid #FFD700;
+            z-index: 25;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            display: none; /* ซ่อนไว้ก่อน */
+            flex-direction: column;
+            align-items: center;
+            width: 80%;
+            max-width: 300px;
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
+        
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .sp-title { font-size: 20px; font-weight: bold; text-transform: uppercase; margin-bottom: 5px; animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0.5; } }
+        
+        .sp-req { font-size: 24px; font-weight: 800; margin: 5px 0; color: white; }
+        
+        /* Bar นับเวลาภารกิจพิเศษ */
+        .sp-bar-bg { width: 100%; height: 8px; background: #444; border-radius: 4px; margin-top: 5px; overflow: hidden; }
+        .sp-bar-fill { height: 100%; background: #FFD700; width: 100%; transition: width 0.1s linear; }
 
         /* ตัวละคร */
         #player {
@@ -94,7 +145,6 @@
             bottom: 20px;
             width: 120px;
             height: 120px;
-            /* แก้ไขลิงก์ตัวละคร */
             background-image: url('https://nonthaphathr.github.io/uploadimg/student2.png'); 
             background-size: contain;
             background-repeat: no-repeat;
@@ -104,19 +154,15 @@
             filter: drop-shadow(0 5px 5px rgba(0,0,0,0.5));
         }
 
-        /* --- STYLES สำหรับของที่ตกลงมา --- */
-        
-        /* Class หลักสำหรับทุกอย่างที่ตกลงมา (เพื่อให้ Position ถูกต้อง) */
+        /* Items */
         .falling-obj {
             position: absolute;
             z-index: 10;
             display: flex;
             justify-content: center;
             align-items: center;
-            cursor: pointer;
         }
 
-        /* 1. คำศัพท์ */
         .word-item {
             padding: 10px 20px;
             border-radius: 15px;
@@ -124,12 +170,11 @@
             font-size: 30px;
             color: #333;
             background-color: white;
-            border: 4px solid #00B0FF; /* ขอบสีฟ้าน้ำ */
+            border: 4px solid #00B0FF;
             box-shadow: 0 0 15px rgba(0, 176, 255, 0.6);
             white-space: nowrap;
         }
 
-        /* 2. ไอเทมพิเศษ (ใช้ Emoji ใหญ่ๆ) */
         .special-item {
             font-size: 50px;
             width: 70px;
@@ -144,7 +189,6 @@
         .item-penalty { border-color: #FF3D00; background: radial-gradient(circle, #fff, #FFEBEE); }
         .item-slow { border-color: #2979FF; background: radial-gradient(circle, #fff, #E3F2FD); }
 
-        /* Popups */
         .score-popup {
             position: absolute;
             font-size: 40px;
@@ -159,18 +203,14 @@
             100% { transform: translateY(-80px) scale(1.5); opacity: 0; }
         }
 
-        /* Effect Slow Motion Overlay */
         #slow-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 176, 255, 0.2);
-            pointer-events: none;
-            display: none;
-            z-index: 5;
+            pointer-events: none; display: none; z-index: 5;
             mix-blend-mode: screen;
         }
 
-        /* UI ลงทะเบียน */
+        /* Form Elements */
         .box-style {
             background: rgba(255, 255, 255, 0.95);
             padding: 30px;
@@ -183,26 +223,16 @@
             border: 4px solid #00B0FF;
         }
         input, select, button {
-            width: 100%;
-            padding: 12px;
-            margin: 8px 0;
-            border-radius: 12px;
-            border: 2px solid #ddd;
-            font-family: 'Sarabun';
-            font-size: 16px;
-            box-sizing: border-box;
+            width: 100%; padding: 12px; margin: 8px 0; border-radius: 12px;
+            border: 2px solid #ddd; font-family: 'Sarabun'; font-size: 16px; box-sizing: border-box;
         }
-        button {
-            border: none; cursor: pointer; font-weight: bold; margin-top: 15px;
-        }
+        button { border: none; cursor: pointer; font-weight: bold; margin-top: 15px; }
         .btn-start { background: linear-gradient(to right, #00B0FF, #0081CB); color: white; }
         .btn-guest { background: #546E7A; color: white; }
-
+        
         .credit {
-            position: absolute;
-            bottom: 5px; width: 100%; text-align: center;
-            color: rgba(255,255,255,0.7); font-size: 14px;
-            text-shadow: 1px 1px 2px black; z-index: 100;
+            position: absolute; bottom: 5px; width: 100%; text-align: center;
+            color: rgba(255,255,255,0.7); font-size: 14px; text-shadow: 1px 1px 2px black; z-index: 100;
         }
     </style>
 </head>
@@ -229,6 +259,13 @@
             </select>
             <input type="number" id="p-num" placeholder="เลขที่">
             
+            <label style="display:block; text-align:left; color:#666; margin-top:5px; font-size:14px;">ระยะเวลาเกม:</label>
+            <select id="p-time">
+                <option value="60">⏱️ 1 นาที (ปกติ)</option>
+                <option value="180">⏱️ 3 นาที (จุใจ)</option>
+                <option value="300">⏱️ 5 นาที (มาราธอน)</option>
+            </select>
+            
             <button class="btn-start" onclick="startGame(true)">ลงทะเบียนเริ่มเล่น</button>
             <button class="btn-guest" onclick="startGame(false)">เล่นแบบไม่ลงทะเบียน</button>
         </div>
@@ -236,18 +273,28 @@
 
     <div id="screen-game" class="screen">
         <div class="hud">
-            <div>⏰ <span id="time-display">60</span></div>
-            <div>🏆 <span id="score-display">0</span></div>
+            <div class="score-box">
+                <span>⏰ <span id="time-display">60</span></span>
+                <span>🏆 <span id="score-display">0</span></span>
+            </div>
+            <button class="btn-stop" onclick="confirmEndGame()">X</button>
         </div>
         
         <div id="mission-display">เก็บคำครุ!</div>
+        
+        <div id="special-mission-box">
+            <div class="sp-title">⚡ ภารกิจด่วน! ⚡</div>
+            <div class="sp-req" id="sp-req-text">ครุ 2 | ลหุ 1</div>
+            <div class="sp-bar-bg"><div class="sp-bar-fill" id="sp-bar"></div></div>
+        </div>
+
         <div id="player"></div>
         <div id="game-area" style="position:absolute; width:100%; height:100%; top:0; left:0; overflow:hidden;"></div>
     </div>
 
     <div id="screen-end" class="screen">
         <div class="box-style">
-            <h1 style="color:#333;">หมดเวลา!</h1>
+            <h1 style="color:#333;">จบเกม!</h1>
             <p>คะแนนรวม</p>
             <div style="font-size:70px; color:#00B0FF; font-weight:800; text-shadow:2px 2px 0 #eee;" id="final-score">0</div>
             <div id="player-info" style="text-align:left; background:#f0f0f0; padding:15px; border-radius:10px; margin-bottom:20px;"></div>
@@ -263,6 +310,7 @@
         let gameState = {
             score: 0,
             timeLeft: 60,
+            initialTime: 60,
             isPlaying: false,
             mission: "garhu",
             playerX: 50,
@@ -270,10 +318,21 @@
             spawnRate: 1000,
             lastSpawn: 0,
             speed: 0.5,
-            isSlowMotion: false, // สถานะ Slow
-            slowMotionTimer: null
+            isSlowMotion: false,
+            slowMotionTimer: null,
+            // ภารกิจพิเศษ
+            specialMission: {
+                active: false,
+                reqGarhu: 0,
+                reqLahu: 0,
+                curGarhu: 0,
+                curLahu: 0,
+                timeLeft: 0,
+                maxTime: 15 // วินาที
+            }
         };
         let playerInfo = {};
+        let specialMissionInterval;
 
         // --- Functions ---
         function startGame(isRegistered) {
@@ -286,33 +345,59 @@
             } else {
                 playerInfo = { name: "ผู้มาเยือน", cls: "-", num: "-" };
             }
+
+            // ตั้งค่าเวลาตามที่เลือก
+            const selectedTime = document.getElementById('p-time').value;
+            gameState.initialTime = parseInt(selectedTime);
+            gameState.timeLeft = gameState.initialTime;
             
             document.getElementById('screen-register').classList.remove('active');
             document.getElementById('screen-game').classList.add('active');
 
-            // Reset
+            // Reset Game State
             gameState.score = 0;
-            gameState.timeLeft = 60;
             gameState.isPlaying = true;
             gameState.fallingItems = [];
             gameState.speed = 0.55;
             gameState.isSlowMotion = false;
+            gameState.specialMission.active = false;
+            
             document.getElementById('game-area').innerHTML = '';
             document.getElementById('slow-overlay').style.display = 'none';
+            document.getElementById('special-mission-box').style.display = 'none';
+            document.getElementById('mission-display').style.opacity = '1';
 
             updateHUD();
             changeMission();
             requestAnimationFrame(gameLoop);
             
+            // Main Timer
             const timerInt = setInterval(() => {
                 if(!gameState.isPlaying) { clearInterval(timerInt); return; }
                 gameState.timeLeft--;
                 updateHUD();
                 
+                // เพิ่มความเร็ว
                 if(gameState.timeLeft % 10 === 0) gameState.speed += 0.08; 
-                if(gameState.timeLeft % 15 === 0 && gameState.timeLeft > 0) changeMission();
+                
+                // เปลี่ยนโจทย์ปกติ (ถ้าไม่มีภารกิจพิเศษ)
+                if(!gameState.specialMission.active && gameState.timeLeft % 15 === 0 && gameState.timeLeft > 0) {
+                    changeMission();
+                }
+
+                // สุ่มเกิดภารกิจพิเศษ (โอกาสเกิดทุกวินาที ถ้ายังไม่มีภารกิจ)
+                if (!gameState.specialMission.active && gameState.timeLeft > 15 && Math.random() < 0.1) { 
+                    startSpecialMission();
+                }
+
                 if(gameState.timeLeft <= 0) endGame();
             }, 1000);
+        }
+
+        function confirmEndGame() {
+            if(confirm("ต้องการจบเกมทันทีหรือไม่?")) {
+                endGame();
+            }
         }
 
         function changeMission() {
@@ -328,6 +413,101 @@
             }
         }
 
+        // --- Special Mission Logic ---
+        function startSpecialMission() {
+            // สุ่มโจทย์: เช่น ครุ 2 ลหุ 1, หรือ ครุ 3, หรือ ลหุ 3
+            const pattern = Math.floor(Math.random() * 3);
+            let g = 0, l = 0;
+            
+            if (pattern === 0) { g = 2; l = 1; } // ครุ 2 ลหุ 1
+            else if (pattern === 1) { g = 1; l = 2; } // ครุ 1 ลหุ 2
+            else { g = 2; l = 2; } // ครุ 2 ลหุ 2
+
+            gameState.specialMission = {
+                active: true,
+                reqGarhu: g, reqLahu: l,
+                curGarhu: 0, curLahu: 0,
+                timeLeft: 15, maxTime: 15
+            };
+
+            updateSpecialMissionUI();
+            
+            // แสดงกล่องภารกิจพิเศษ
+            document.getElementById('mission-display').style.opacity = '0.3'; // จางภารกิจหลักลง
+            document.getElementById('special-mission-box').style.display = 'flex';
+            
+            // จับเวลาภารกิจพิเศษ
+            if(specialMissionInterval) clearInterval(specialMissionInterval);
+            specialMissionInterval = setInterval(() => {
+                if(!gameState.isPlaying || !gameState.specialMission.active) {
+                    clearInterval(specialMissionInterval); return;
+                }
+                
+                gameState.specialMission.timeLeft -= 0.1; // ลดละเอียดหน่อยเพื่อ animation bar
+                
+                // Update Bar width
+                const pct = (gameState.specialMission.timeLeft / gameState.specialMission.maxTime) * 100;
+                document.getElementById('sp-bar').style.width = pct + "%";
+
+                if (gameState.specialMission.timeLeft <= 0) {
+                    endSpecialMission(false); // หมดเวลา ล้มเหลว
+                }
+            }, 100);
+        }
+
+        function updateSpecialMissionUI() {
+            const sm = gameState.specialMission;
+            const gLeft = sm.reqGarhu - sm.curGarhu;
+            const lLeft = sm.reqLahu - sm.curLahu;
+            
+            let text = "";
+            if (gLeft > 0) text += `ครุ ${gLeft} `;
+            if (lLeft > 0) text += `ลหุ ${lLeft}`;
+            if (gLeft <= 0 && lLeft <= 0) text = "สำเร็จ!";
+            
+            document.getElementById('sp-req-text').innerText = text;
+        }
+
+        function endSpecialMission(success) {
+            clearInterval(specialMissionInterval);
+            gameState.specialMission.active = false;
+            document.getElementById('special-mission-box').style.display = 'none';
+            document.getElementById('mission-display').style.opacity = '1';
+
+            if (success) {
+                gameState.score += 50;
+                showPopup("⚡โบนัส +50⚡", "50%", "50%", "#FFD700");
+                // Effect ระเบิดพลุ (ใส่เสียงได้ถ้ามี)
+            } else {
+                showPopup("หมดเวลาภารกิจ!", "50%", "50%", "#ccc");
+            }
+            updateHUD();
+        }
+
+        function checkSpecialMissionProgress(type) {
+            if (!gameState.specialMission.active) return false;
+
+            let updated = false;
+            if (type === "garhu" && gameState.specialMission.curGarhu < gameState.specialMission.reqGarhu) {
+                gameState.specialMission.curGarhu++;
+                updated = true;
+            } else if (type === "lahu" && gameState.specialMission.curLahu < gameState.specialMission.reqLahu) {
+                gameState.specialMission.curLahu++;
+                updated = true;
+            }
+
+            if (updated) {
+                updateSpecialMissionUI();
+                // Check win condition
+                if (gameState.specialMission.curGarhu >= gameState.specialMission.reqGarhu &&
+                    gameState.specialMission.curLahu >= gameState.specialMission.reqLahu) {
+                    endSpecialMission(true);
+                }
+                return true; // บอกว่าไอเทมนี้ถูกใช้ในภารกิจพิเศษ
+            }
+            return false;
+        }
+
         function updateHUD() {
             document.getElementById('time-display').innerText = gameState.timeLeft;
             document.getElementById('score-display').innerText = gameState.score;
@@ -335,6 +515,7 @@
 
         function endGame() {
             gameState.isPlaying = false;
+            clearInterval(specialMissionInterval);
             document.getElementById('screen-game').classList.remove('active');
             document.getElementById('screen-end').classList.add('active');
             document.getElementById('final-score').innerText = gameState.score;
@@ -344,7 +525,7 @@
             `;
         }
 
-        // --- Player Control ---
+        // --- Player & Game Loop ---
         const playerElem = document.getElementById('player');
         document.addEventListener('touchmove', movePlayer, {passive: false});
         document.addEventListener('mousemove', movePlayer);
@@ -360,10 +541,8 @@
             playerElem.style.left = `calc(${percent}% - 60px)`;
         }
 
-        // --- Game Logic ---
         function gameLoop(time) {
             if(!gameState.isPlaying) return;
-
             if(time - gameState.lastSpawn > gameState.spawnRate) {
                 spawnItem();
                 gameState.lastSpawn = time;
@@ -376,11 +555,6 @@
         function spawnItem() {
             const chance = Math.random();
             let type, content, className, specificClass;
-
-            // 0-8% : ดาวรุ่ง (+20)
-            // 8-16% : ระเบิด (-10)
-            // 16-24% : นาฬิกา (Slow)
-            // เหลือ : คำศัพท์
 
             if (chance < 0.08) {
                 type = "bonus"; content = "🌟"; specificClass = "item-bonus special-item";
@@ -397,54 +571,33 @@
             }
 
             const el = document.createElement('div');
-            // ใส่ class falling-obj เพื่อให้มี position absolute
             el.className = `falling-obj ${specificClass}`;
             el.innerText = content;
-            
             const startX = 10 + Math.random() * 80;
             el.style.left = startX + "%";
             el.style.top = "-80px"; 
-
             document.getElementById('game-area').appendChild(el);
 
             gameState.fallingItems.push({
-                el: el,
-                y: -10,
-                type: type,
-                active: true
+                el: el, y: -10, type: type, active: true
             });
         }
 
         function updateItems() {
             const playerRect = playerElem.getBoundingClientRect();
-            // Hitbox
-            const pBox = {
-                l: playerRect.left + 30, r: playerRect.right - 30,
-                t: playerRect.top + 40, b: playerRect.bottom
-            };
-
-            // คำนวณความเร็วปัจจุบัน (ถ้า Slow Motion อยู่ ให้ช้าลง 50%)
+            const pBox = { l: playerRect.left + 30, r: playerRect.right - 30, t: playerRect.top + 40, b: playerRect.bottom };
+            
             let currentSpeed = gameState.speed;
-            if (gameState.isSlowMotion) {
-                currentSpeed = currentSpeed * 0.5;
-            }
+            if (gameState.isSlowMotion) currentSpeed = currentSpeed * 0.5;
 
             gameState.fallingItems.forEach(item => {
                 if(!item.active) return;
-
                 item.y += currentSpeed;
                 item.el.style.top = item.y + "%";
+                if(item.y > 110) { item.active = false; item.el.remove(); return; }
 
-                if(item.y > 110) {
-                    item.active = false;
-                    item.el.remove();
-                    return;
-                }
-
-                // Check Collision
                 const itemRect = item.el.getBoundingClientRect();
-                if (pBox.l < itemRect.right && pBox.r > itemRect.left &&
-                    pBox.t < itemRect.bottom && pBox.b > itemRect.top) {
+                if (pBox.l < itemRect.right && pBox.r > itemRect.left && pBox.t < itemRect.bottom && pBox.b > itemRect.top) {
                     handleCollect(item);
                 }
             });
@@ -454,32 +607,38 @@
             item.active = false;
             item.el.remove();
 
-            // 1. Bonus 🌟
+            // Special Items
             if (item.type === "bonus") {
                 gameState.score += 20;
                 showPopup("✨+20", item.el.style.left, item.el.style.top, "#FFD700");
                 return;
             }
-
-            // 2. Penalty 💣
             if (item.type === "penalty") {
                 if(gameState.score > 0) gameState.score -= 10;
                 showPopup("💥-10", item.el.style.left, item.el.style.top, "#FF3D00");
-                
-                // Effect มึนงง
                 playerElem.style.filter = "hue-rotate(90deg) blur(2px)";
                 setTimeout(() => playerElem.style.filter = "drop-shadow(0 5px 5px rgba(0,0,0,0.5))", 500);
                 return;
             }
-
-            // 3. Slow Motion ⏳ (ใหม่!)
             if (item.type === "slow") {
                 activateSlowMotion();
                 showPopup("⏳ ช้าลง!", item.el.style.left, item.el.style.top, "#2979FF");
                 return;
             }
 
-            // 4. Words
+            // Word Items
+            // 1. เช็คว่าเข้าเงื่อนไขภารกิจพิเศษหรือไม่?
+            if (gameState.specialMission.active) {
+                const consumed = checkSpecialMissionProgress(item.type);
+                if (consumed) {
+                    showPopup("👌 เก็บได้!", item.el.style.left, item.el.style.top, "#fff");
+                    // ยังได้คะแนนปกติด้วย
+                    gameState.score += 10;
+                    return; 
+                }
+            }
+
+            // 2. ถ้าไม่เข้าภารกิจพิเศษ เช็คภารกิจปกติ
             if(item.type === gameState.mission) {
                 gameState.score += 10;
                 showPopup("+10", item.el.style.left, item.el.style.top, "#00E676");
@@ -495,13 +654,9 @@
         }
 
         function activateSlowMotion() {
-            // ถ้ามี slow อยู่แล้ว ให้ clear ตัวเก่าก่อน (รีเซ็ตเวลาใหม่)
             if (gameState.slowMotionTimer) clearTimeout(gameState.slowMotionTimer);
-            
             gameState.isSlowMotion = true;
             document.getElementById('slow-overlay').style.display = 'block';
-
-            // ตั้งเวลา 5 วินาทีให้กลับเป็นปกติ
             gameState.slowMotionTimer = setTimeout(() => {
                 gameState.isSlowMotion = false;
                 document.getElementById('slow-overlay').style.display = 'none';
@@ -518,7 +673,6 @@
             document.getElementById('game-area').appendChild(pop);
             setTimeout(() => pop.remove(), 800);
         }
-
     </script>
 </body>
 </html>
