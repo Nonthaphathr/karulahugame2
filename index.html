@@ -11,12 +11,12 @@
             margin: 0;
             padding: 0;
             overflow: hidden;
-            background: linear-gradient(180deg, #87CEEB 0%, #E0F7FA 100%);
+            background-color: #333;
             touch-action: none;
             user-select: none;
         }
 
-        /* หน้าจอปกติ */
+        /* หน้าจอต่างๆ */
         .screen {
             position: absolute;
             width: 100%;
@@ -29,48 +29,60 @@
         }
         .active { display: flex; }
 
-        /* UI ตกแต่ง */
+        /* พื้นหลังหน้าเกม */
         .game-bg {
             position: absolute;
             width: 100%;
             height: 100%;
-            background-image: url('https://img.freepik.com/free-vector/nature-park-scene-background_1308-61726.jpg'); /* พื้นหลังสวน */
+            background-image: url('https://nonthaphathr.github.io/uploadimg/bgrain.png');
             background-size: cover;
-            background-position: center bottom;
+            background-position: center;
             z-index: 0;
-            filter: brightness(0.9);
         }
 
+        /* Overlay ทำให้พื้นหลังมืดลงนิดนึงเพื่อให้ตัวหนังสือเด่น */
+        .bg-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        /* ส่วนแสดงคะแนนและเวลา */
         .hud {
             position: absolute;
-            top: 10px;
+            top: 15px;
             width: 90%;
             display: flex;
             justify-content: space-between;
-            font-size: 20px;
+            font-size: 22px;
             font-weight: bold;
             color: #fff;
-            text-shadow: 2px 2px 0 #000;
+            text-shadow: 2px 2px 4px #000;
             z-index: 20;
-            background: rgba(0,0,0,0.3);
-            padding: 10px;
-            border-radius: 15px;
+            background: rgba(0,0,0,0.5);
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: 2px solid rgba(255,255,255,0.3);
         }
 
         /* ภารกิจปัจจุบัน */
         #mission-display {
             position: absolute;
-            top: 70px;
-            background: #fff;
-            padding: 10px 30px;
+            top: 80px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 10px 25px;
             border-radius: 50px;
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 800;
             color: #333;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             z-index: 20;
             animation: pulse 2s infinite;
-            border: 4px solid #FF9800;
+            border: 5px solid;
+            text-align: center;
+            min-width: 200px;
         }
 
         @keyframes pulse {
@@ -82,88 +94,130 @@
         /* ตัวละคร */
         #player {
             position: absolute;
-            bottom: 20px; /* ยืนบนพื้น */
-            width: 100px;
-            height: 100px;
-            /* รูปตัวละครถือตะกร้า */
-            background-image: url('https://cdn-icons-png.flaticon.com/512/4509/4509653.png'); 
+            bottom: 20px;
+            width: 110px;
+            height: 110px;
+            /* รูปตัวละคร */
+            background-image: url('https://nonthaphathr.github.io/uploadimg/student.png'); 
             background-size: contain;
             background-repeat: no-repeat;
-            background-position: center;
+            background-position: center bottom;
             z-index: 15;
             transition: transform 0.1s;
+            filter: drop-shadow(0 5px 5px rgba(0,0,0,0.5));
         }
 
         /* คำศัพท์ที่ตกลงมา */
         .falling-word {
             position: absolute;
-            padding: 10px 15px;
-            border-radius: 15px;
-            font-weight: bold;
-            font-size: 20px;
-            color: white;
-            text-shadow: 1px 1px 2px black;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            padding: 12px 20px;
+            border-radius: 20px;
+            font-weight: 800; /* ตัวหนา */
+            font-size: 32px; /* ตัวใหญ่ */
+            color: #333;
+            background-color: white;
+            /* ขอบสีฟ้าเหมือนน้ำ */
+            border: 4px solid #00B0FF; 
+            box-shadow: 0 4px 10px rgba(0, 176, 255, 0.4);
             z-index: 10;
             white-space: nowrap;
+            text-align: center;
         }
-        .item-garhu { background: linear-gradient(45deg, #ff4081, #f50057); border: 2px solid white; }
-        .item-lahu { background: linear-gradient(45deg, #00e676, #00c853); border: 2px solid white; }
+
+        /* ไอเทมพิเศษ */
+        .item-bonus {
+            background-color: #FFD700; /* สีทอง */
+            border: 4px solid #FFF;
+            color: #fff;
+            text-shadow: 1px 1px 2px black;
+            font-size: 40px; /* ไอคอนใหญ่ */
+            padding: 5px;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .item-penalty {
+            background-color: #333; /* สีดำ */
+            border: 4px solid #FF3D00;
+            color: white;
+            font-size: 35px;
+            padding: 5px;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
         /* เอฟเฟกต์ตอนเก็บได้ */
         .score-popup {
             position: absolute;
-            font-size: 30px;
-            font-weight: bold;
-            color: yellow;
-            text-shadow: 0 0 5px black;
+            font-size: 40px;
+            font-weight: 900;
+            color: #FFD700;
+            text-shadow: 2px 2px 0 #000;
             pointer-events: none;
             animation: floatUp 0.8s forwards;
             z-index: 30;
         }
 
         @keyframes floatUp {
-            0% { transform: translateY(0); opacity: 1; }
-            100% { transform: translateY(-50px); opacity: 0; }
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-80px) scale(1.5); opacity: 0; }
         }
 
         /* หน้าลงทะเบียน */
         .box-style {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
             padding: 30px;
-            border-radius: 20px;
+            border-radius: 25px;
             text-align: center;
-            width: 80%;
+            width: 85%;
             max-width: 400px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
             z-index: 30;
+            border: 4px solid #00B0FF;
         }
-        input, select, button {
+        
+        input, select {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             margin: 8px 0;
-            border-radius: 10px;
-            border: 1px solid #ccc;
+            border-radius: 12px;
+            border: 2px solid #ddd;
             font-family: 'Sarabun';
             font-size: 16px;
             box-sizing: border-box;
         }
+        
         button {
-            background: #FF9800;
-            color: white;
-            font-weight: bold;
+            width: 100%;
+            padding: 14px;
+            margin-top: 15px;
+            border-radius: 30px;
             border: none;
             cursor: pointer;
-            font-size: 20px;
-            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            font-family: 'Sarabun';
+            transition: transform 0.1s;
         }
-        
+        button:active { transform: scale(0.95); }
+
+        .btn-start { background: linear-gradient(to right, #00B0FF, #0081CB); color: white; box-shadow: 0 5px 15px rgba(0, 176, 255, 0.4); }
+        .btn-guest { background: #546E7A; color: white; margin-top: 10px; font-size: 16px; }
+
         .credit {
             position: absolute;
             bottom: 5px;
             width: 100%;
             text-align: center;
-            color: rgba(255,255,255,0.8);
+            color: rgba(255,255,255,0.7);
             font-size: 14px;
             text-shadow: 1px 1px 2px black;
             z-index: 100;
@@ -175,29 +229,34 @@
 
     <div class="credit">พัฒนาโดย ครูนนทพัทธ์ หิรัญเรือง</div>
     <div class="game-bg"></div>
+    <div class="bg-overlay"></div>
 
     <div id="screen-register" class="screen active">
         <div class="box-style">
-            <h2 style="color:#FF9800; margin-top:0;">☔ ฝนคำศัพท์ ครุ-ลหุ</h2>
+            <h1 style="color:#0081CB; margin-top:0; margin-bottom: 10px;">☔ ฝนคำศัพท์</h1>
+            <p style="color:#666; margin-top:0;">เกมแยกคำ ครุ-ลหุ</p>
+            
             <input type="text" id="p-name" placeholder="ชื่อ-นามสกุล">
             <select id="p-class">
                 <option value="">-- เลือกระดับชั้น --</option>
-                <option value="ม.1">ม.1</option>
-                <option value="ม.2">ม.2</option>
-                <option value="ม.3">ม.3</option>
-                <option value="ม.4">ม.4</option>
-                <option value="ม.5">ม.5</option>
-                <option value="ม.6">ม.6</option>
+                <option value="ม.1">มัธยมศึกษาปีที่ 1</option>
+                <option value="ม.2">มัธยมศึกษาปีที่ 2</option>
+                <option value="ม.3">มัธยมศึกษาปีที่ 3</option>
+                <option value="ม.4">มัธยมศึกษาปีที่ 4</option>
+                <option value="ม.5">มัธยมศึกษาปีที่ 5</option>
+                <option value="ม.6">มัธยมศึกษาปีที่ 6</option>
             </select>
             <input type="number" id="p-num" placeholder="เลขที่">
-            <button onclick="startGame()">เริ่มเล่นเกม</button>
+            
+            <button class="btn-start" onclick="startGame(true)">ลงทะเบียนเริ่มเล่น</button>
+            <button class="btn-guest" onclick="startGame(false)">เล่นแบบไม่ลงทะเบียน</button>
         </div>
     </div>
 
     <div id="screen-game" class="screen">
         <div class="hud">
-            <div>⏱️ <span id="time-display">60</span></div>
-            <div>⭐ <span id="score-display">0</span></div>
+            <div>⏰ <span id="time-display">60</span></div>
+            <div>🏆 <span id="score-display">0</span></div>
         </div>
         
         <div id="mission-display">เก็บคำครุ!</div>
@@ -209,11 +268,11 @@
 
     <div id="screen-end" class="screen">
         <div class="box-style">
-            <h1>หมดเวลา!</h1>
-            <p>คะแนนของคุณ</p>
-            <div style="font-size:60px; color:#FF9800; font-weight:800;" id="final-score">0</div>
-            <div id="player-info" style="text-align:left; background:#f0f0f0; padding:15px; border-radius:10px; margin-bottom:15px;"></div>
-            <button onclick="location.reload()">เล่นใหม่</button>
+            <h1 style="color:#333;">หมดเวลา!</h1>
+            <p style="font-size: 18px;">คะแนนของคุณ</p>
+            <div style="font-size:70px; color:#00B0FF; font-weight:800; text-shadow: 2px 2px 0px #eee;" id="final-score">0</div>
+            <div id="player-info" style="text-align:left; background:#f0f0f0; padding:15px; border-radius:10px; margin-bottom:20px; font-size: 16px;"></div>
+            <button class="btn-start" onclick="location.reload()">เล่นใหม่อีกครั้ง</button>
         </div>
     </div>
 
@@ -229,47 +288,49 @@
             mission: "garhu", // garhu หรือ lahu
             playerX: 50, // %
             fallingItems: [],
-            spawnRate: 1000, // ms
+            spawnRate: 1000,
             lastSpawn: 0,
             speed: 0.5 // ความเร็วตกเริ่มต้น
         };
 
         let playerInfo = {};
-        let gameLoopId;
+        
+        // --- เริ่มเกม ---
+        function startGame(isRegistered) {
+            if (isRegistered) {
+                const name = document.getElementById('p-name').value;
+                const cls = document.getElementById('p-class').value;
+                const num = document.getElementById('p-num').value;
 
-        // --- ระบบเกม ---
-
-        function startGame() {
-            // รับข้อมูล
-            const name = document.getElementById('p-name').value;
-            const cls = document.getElementById('p-class').value;
-            const num = document.getElementById('p-num').value;
-
-            if(!name || !cls || !num) {
-                alert("กรุณากรอกข้อมูลให้ครบถ้วน");
-                return;
+                if(!name || !cls || !num) {
+                    alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+                    return;
+                }
+                playerInfo = { name, cls, num };
+            } else {
+                // โหมด Guest
+                playerInfo = { name: "ผู้มาเยือน", cls: "-", num: "-" };
             }
-
-            playerInfo = { name, cls, num };
             
-            // สลับหน้าจอ
+            // เปลี่ยนหน้าจอ
             document.getElementById('screen-register').classList.remove('active');
             document.getElementById('screen-game').classList.add('active');
 
-            // รีเซ็ตค่า
+            // รีเซ็ตค่าเกม
             gameState.score = 0;
             gameState.timeLeft = 60;
             gameState.isPlaying = true;
             gameState.fallingItems = [];
-            gameState.speed = 0.5; // ความเร็วเริ่มต้น (0.5% ต่อเฟรม)
+            gameState.speed = 0.55; // ความเร็วเริ่มต้น
+            document.getElementById('game-area').innerHTML = ''; // ล้างคำเก่า
             
             updateHUD();
             changeMission();
 
-            // เริ่ม Loop
+            // เริ่ม Loop เกม
             requestAnimationFrame(gameLoop);
             
-            // จับเวลาถอยหลัง
+            // จับเวลา
             const timerInt = setInterval(() => {
                 if(!gameState.isPlaying) {
                     clearInterval(timerInt);
@@ -278,9 +339,9 @@
                 gameState.timeLeft--;
                 updateHUD();
                 
-                // เพิ่มความยากทุก 10 วินาที
+                // เพิ่มความเร็วเมื่อเวลาผ่านไป
                 if(gameState.timeLeft % 10 === 0) {
-                    gameState.speed += 0.1; 
+                    gameState.speed += 0.08; 
                 }
 
                 // สลับโจทย์ทุก 15 วินาที
@@ -295,19 +356,18 @@
         }
 
         function changeMission() {
-            // สุ่มว่าจะให้เก็บ ครุ หรือ ลหุ
             const types = ["garhu", "lahu"];
             gameState.mission = types[Math.floor(Math.random() * types.length)];
             
             const missionBox = document.getElementById('mission-display');
             if(gameState.mission === "garhu") {
-                missionBox.innerText = "🎯 จงเก็บคำครุ!";
-                missionBox.style.color = "#d81b60";
-                missionBox.style.borderColor = "#d81b60";
+                missionBox.innerText = "🎯 เก็บคำครุ";
+                missionBox.style.color = "#E91E63"; // ชมพูเข้ม
+                missionBox.style.borderColor = "#E91E63";
             } else {
-                missionBox.innerText = "🎯 จงเก็บคำลหุ!";
-                missionBox.style.color = "#00c853";
-                missionBox.style.borderColor = "#00c853";
+                missionBox.innerText = "🎯 เก็บคำลหุ";
+                missionBox.style.color = "#00C853"; // เขียว
+                missionBox.style.borderColor = "#00C853";
             }
         }
 
@@ -322,80 +382,96 @@
             document.getElementById('screen-end').classList.add('active');
             document.getElementById('final-score').innerText = gameState.score;
             document.getElementById('player-info').innerHTML = `
-                <b>ชื่อ:</b> ${playerInfo.name}<br>
-                <b>ชั้น:</b> ${playerInfo.cls} <b>เลขที่:</b> ${playerInfo.num}
+                <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                    <span><b>ชื่อ:</b> ${playerInfo.name}</span>
+                </div>
+                <div style="display:flex; justify-content:space-between;">
+                    <span><b>ชั้น:</b> ${playerInfo.cls}</span>
+                    <span><b>เลขที่:</b> ${playerInfo.num}</span>
+                </div>
             `;
         }
 
-        // --- ระบบควบคุมตัวละคร ---
+        // --- ควบคุมตัวละคร ---
         const playerElem = document.getElementById('player');
         
-        // Touch / Mouse Move
         document.addEventListener('touchmove', movePlayer, {passive: false});
         document.addEventListener('mousemove', movePlayer);
 
         function movePlayer(e) {
             if(!gameState.isPlaying) return;
-            e.preventDefault(); // กันจอลาก
+            e.preventDefault(); 
             
             let clientX;
             if(e.touches) clientX = e.touches[0].clientX;
             else clientX = e.clientX;
 
-            // แปลงพิกัด X เป็น % ของหน้าจอ
             let percent = (clientX / window.innerWidth) * 100;
-            
-            // จำกัดขอบ
             if(percent < 10) percent = 10;
             if(percent > 90) percent = 90;
 
             gameState.playerX = percent;
-            playerElem.style.left = `calc(${percent}% - 50px)`; // -50px คือครึ่งหนึ่งของความกว้างตัว
+            playerElem.style.left = `calc(${percent}% - 55px)`; // กึ่งกลางตัวละคร
         }
 
-        // --- Game Loop (หัวใจหลัก) ---
+        // --- Game Loop ---
         function gameLoop(time) {
             if(!gameState.isPlaying) return;
 
-            // 1. สร้างคำศัพท์ (Spawn)
+            // Spawn Items
             if(time - gameState.lastSpawn > gameState.spawnRate) {
                 spawnItem();
                 gameState.lastSpawn = time;
-                // สุ่มเวลาเกิดครั้งถัดไปให้ไม่แน่นอน (ระหว่าง 0.5 - 1.5 วิ)
-                gameState.spawnRate = 500 + Math.random() * 1000;
+                gameState.spawnRate = 600 + Math.random() * 800; // สุ่มเวลาเกิดใหม่
             }
 
-            // 2. เคลื่อนที่และเช็คชน
+            // Update movement & Collision
             updateItems();
 
             requestAnimationFrame(gameLoop);
         }
 
         function spawnItem() {
-            // สุ่มคำ
-            const isGarhu = Math.random() > 0.5;
-            const wordList = isGarhu ? garhuWords : lahuWords;
-            const text = wordList[Math.floor(Math.random() * wordList.length)];
-            const type = isGarhu ? "garhu" : "lahu";
+            const chance = Math.random();
+            let type, text, className;
 
-            // สร้าง Element
+            // ระบบสุ่มไอเทม
+            // 10% = ดาวโบนัส
+            // 10% = ระเบิด
+            // 80% = คำศัพท์
+            
+            if (chance < 0.10) {
+                // Bonus
+                type = "bonus";
+                text = "🌟";
+                className = "item-bonus";
+            } else if (chance < 0.20) {
+                // Penalty
+                type = "penalty";
+                text = "💣";
+                className = "item-penalty";
+            } else {
+                // Word
+                const isGarhu = Math.random() > 0.5;
+                const wordList = isGarhu ? garhuWords : lahuWords;
+                text = wordList[Math.floor(Math.random() * wordList.length)];
+                type = isGarhu ? "garhu" : "lahu";
+                className = "falling-word"; // คลาสปกติมีขอบสีฟ้า
+            }
+
             const el = document.createElement('div');
-            el.classList.add('falling-word');
-            el.classList.add(isGarhu ? 'item-garhu' : 'item-lahu');
+            el.className = className;
             el.innerText = text;
             
-            // สุ่มตำแหน่ง X (10% - 90%)
             const startX = 10 + Math.random() * 80;
             el.style.left = startX + "%";
-            el.style.top = "-50px"; // เริ่มเหนือจอ
+            el.style.top = "-80px"; 
 
             document.getElementById('game-area').appendChild(el);
 
-            // เก็บลง Array
             gameState.fallingItems.push({
                 el: el,
-                x: startX,
-                y: -10, // % top
+                y: -15, // % top
                 type: type,
                 active: true
             });
@@ -403,38 +479,34 @@
 
         function updateItems() {
             const playerRect = playerElem.getBoundingClientRect();
-            // Hitbox ตัวละคร (ทำให้เล็กลงนิดนึงจะได้ไม่ชนง่ายไป)
+            // Hitbox
             const pBox = {
-                l: playerRect.left + 20,
-                r: playerRect.right - 20,
-                t: playerRect.top + 20,
+                l: playerRect.left + 30,
+                r: playerRect.right - 30,
+                t: playerRect.top + 40,
                 b: playerRect.bottom
             };
 
             gameState.fallingItems.forEach(item => {
                 if(!item.active) return;
 
-                // ขยับลง
                 item.y += gameState.speed;
                 item.el.style.top = item.y + "%";
 
-                // เช็คชนพื้น (ลบออก)
-                if(item.y > 100) {
+                if(item.y > 110) {
                     item.active = false;
                     item.el.remove();
                     return;
                 }
 
-                // เช็คชนตัวละคร (Collision Detection)
+                // Collision
                 const itemRect = item.el.getBoundingClientRect();
                 
-                // ตรวจสอบการซ้อนทับกันของสี่เหลี่ยม
                 if (pBox.l < itemRect.right &&
                     pBox.r > itemRect.left &&
                     pBox.t < itemRect.bottom &&
                     pBox.b > itemRect.top) {
                     
-                    // ชนแล้ว!
                     handleCollect(item);
                 }
             });
@@ -444,31 +516,56 @@
             item.active = false;
             item.el.remove();
 
-            // ตรวจว่าเก็บถูกไหม
+            // 1. ไอเทมโบนัส
+            if (item.type === "bonus") {
+                gameState.score += 20;
+                showPopup("✨+20", item.el.style.left, item.el.style.top, "#FFD700");
+                playSoundEffect("good");
+                return;
+            }
+
+            // 2. ไอเทมลงโทษ
+            if (item.type === "penalty") {
+                if(gameState.score > 0) gameState.score -= 10;
+                showPopup("💥-10", item.el.style.left, item.el.style.top, "#FF3D00");
+                playSoundEffect("bad");
+                // เอฟเฟกต์มึนงง
+                playerElem.style.filter = "hue-rotate(90deg) blur(2px)";
+                setTimeout(() => playerElem.style.filter = "drop-shadow(0 5px 5px rgba(0,0,0,0.5))", 500);
+                return;
+            }
+
+            // 3. คำศัพท์ปกติ
             if(item.type === gameState.mission) {
-                // ถูกต้อง
                 gameState.score += 10;
-                showPopup("✨+10", item.el.style.left, item.el.style.top);
+                showPopup("+10", item.el.style.left, item.el.style.top, "#00E676");
+                playSoundEffect("good");
                 playerElem.style.transform = "scale(1.2)";
                 setTimeout(() => playerElem.style.transform = "scale(1)", 100);
             } else {
-                // ผิด (เก็บของที่ไม่ใช่โจทย์)
                 if(gameState.score > 0) gameState.score -= 5;
-                showPopup("❌-5", item.el.style.left, item.el.style.top);
-                playerElem.style.filter = "grayscale(100%)"; // ทำตัวเทาแป๊บนึง
-                setTimeout(() => playerElem.style.filter = "none", 200);
+                showPopup("❌-5", item.el.style.left, item.el.style.top, "#D32F2F");
+                playSoundEffect("bad");
+                playerElem.style.opacity = "0.5";
+                setTimeout(() => playerElem.style.opacity = "1", 200);
             }
             updateHUD();
         }
 
-        function showPopup(text, x, y) {
+        function showPopup(text, x, y, color) {
             const pop = document.createElement('div');
             pop.classList.add('score-popup');
             pop.innerText = text;
             pop.style.left = x;
             pop.style.top = y;
+            pop.style.color = color;
             document.getElementById('game-area').appendChild(pop);
             setTimeout(() => pop.remove(), 800);
+        }
+        
+        // ฟังก์ชันหลอกๆ สำหรับเสียง (เผื่อใส่เพิ่ม)
+        function playSoundEffect(type) {
+            // สามารถเพิ่มเสียงได้ที่นี่ถ้าต้องการ
         }
 
     </script>
