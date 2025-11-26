@@ -28,7 +28,7 @@
         }
         .active { display: flex; }
 
-        /* พื้นหลังใหม่ */
+        /* พื้นหลัง */
         .game-bg {
             position: absolute;
             width: 100%;
@@ -54,7 +54,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 22px;
+            font-size: 20px;
             font-weight: bold;
             color: #fff;
             text-shadow: 2px 2px 4px #000;
@@ -62,44 +62,43 @@
         }
         .score-box {
             background: rgba(0,0,0,0.6);
-            padding: 8px 20px;
+            padding: 5px 15px;
             border-radius: 30px;
             border: 2px solid rgba(255,255,255,0.3);
             display: flex; gap: 15px;
         }
         .btn-stop {
             background: #D32F2F; color: white; border: 2px solid white;
-            width: 40px; height: 40px; border-radius: 50%;
-            font-weight: bold; font-size: 20px; cursor: pointer;
+            width: 35px; height: 35px; border-radius: 50%;
+            font-weight: bold; font-size: 18px; cursor: pointer;
             display: flex; justify-content: center; align-items: center;
         }
 
-        /* ภารกิจหลัก */
+        /* ภารกิจ */
         #mission-display {
             position: absolute;
-            top: 80px;
+            top: 70px;
             background: rgba(255, 255, 255, 0.95);
-            padding: 10px 25px;
+            padding: 10px 20px;
             border-radius: 50px;
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 800;
             color: #333;
             box-shadow: 0 5px 15px rgba(0,0,0,0.4);
             z-index: 20;
             border: 5px solid;
             text-align: center;
-            min-width: 220px;
+            min-width: 200px;
             transition: all 0.3s;
         }
 
-        /* ภารกิจพิเศษ (ปรับเป็นสีดำโปร่งใส) */
+        /* ภารกิจพิเศษ */
         #special-mission-box {
             position: absolute;
-            top: 150px;
-            /* สีดำโปร่งแสง */
+            top: 140px;
             background: rgba(0, 0, 0, 0.65); 
             color: #FFD700;
-            padding: 15px;
+            padding: 10px;
             border-radius: 15px;
             border: 2px solid rgba(255, 215, 0, 0.7);
             z-index: 25;
@@ -108,19 +107,18 @@
             flex-direction: column;
             align-items: center;
             width: 80%;
-            max-width: 300px;
-            backdrop-filter: blur(2px); /* เบลอฉากหลังนิดๆ */
+            max-width: 280px;
+            backdrop-filter: blur(2px);
         }
-        
-        .sp-title { font-size: 20px; font-weight: bold; text-transform: uppercase; margin-bottom: 5px; animation: blink 1s infinite; }
+        .sp-title { font-size: 18px; font-weight: bold; text-transform: uppercase; margin-bottom: 5px; animation: blink 1s infinite; }
         @keyframes blink { 50% { opacity: 0.5; } }
-        .sp-req { font-size: 24px; font-weight: 800; margin: 5px 0; color: white; text-shadow: 0 0 5px black; }
-        .sp-bar-bg { width: 100%; height: 8px; background: rgba(255,255,255,0.2); border-radius: 4px; margin-top: 5px; overflow: hidden; }
+        .sp-req { font-size: 22px; font-weight: 800; margin: 5px 0; color: white; text-shadow: 0 0 5px black; }
+        .sp-bar-bg { width: 100%; height: 6px; background: rgba(255,255,255,0.2); border-radius: 3px; margin-top: 5px; overflow: hidden; }
         .sp-bar-fill { height: 100%; background: #FFD700; width: 100%; transition: width 0.1s linear; }
 
         /* ตัวละคร */
         #player {
-            position: absolute; bottom: 20px; width: 120px; height: 120px;
+            position: absolute; bottom: 20px; width: 100px; height: 100px;
             background-image: url('https://nonthaphathr.github.io/uploadimg/student2.png'); 
             background-size: contain; background-repeat: no-repeat; background-position: center bottom;
             z-index: 15; transition: transform 0.1s;
@@ -131,30 +129,25 @@
         .falling-obj {
             position: absolute; z-index: 10; display: flex; justify-content: center; align-items: center;
         }
-
         .word-item {
-            padding: 10px 20px; border-radius: 15px; font-weight: 800; font-size: 30px;
-            color: #333; background-color: white; border: 4px solid #00B0FF;
-            box-shadow: 0 0 15px rgba(0, 176, 255, 0.6); white-space: nowrap;
+            padding: 8px 16px; border-radius: 15px; font-weight: 800; font-size: 24px;
+            color: #333; background-color: white; border: 3px solid #00B0FF;
+            box-shadow: 0 0 10px rgba(0, 176, 255, 0.6); white-space: nowrap;
         }
-
         .special-item {
-            font-size: 50px; width: 70px; height: 70px; border-radius: 50%;
+            font-size: 40px; width: 60px; height: 60px; border-radius: 50%;
             background: rgba(255,255,255,0.9); border: 3px solid #fff;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3); text-shadow: 2px 2px 0 rgba(0,0,0,0.2);
         }
         .item-bonus { border-color: #FFD700; background: radial-gradient(circle, #fff, #FFF8E1); }
         .item-penalty { border-color: #FF3D00; background: radial-gradient(circle, #fff, #FFEBEE); }
         .item-slow { border-color: #2979FF; background: radial-gradient(circle, #fff, #E3F2FD); }
-        
-        /* New Items: Lightning */
-        .item-light-y { border-color: #FFEB3B; background: radial-gradient(circle, #fff, #FFFDE7); box-shadow: 0 0 20px #FFEB3B; animation: spin 2s infinite linear; }
-        .item-light-r { border-color: #D50000; background: radial-gradient(circle, #fff, #FFEBEE); box-shadow: 0 0 20px #D50000; animation: spin 2s infinite linear reverse; }
-        
+        .item-light-y { border-color: #FFEB3B; background: radial-gradient(circle, #fff, #FFFDE7); box-shadow: 0 0 15px #FFEB3B; animation: spin 2s infinite linear; }
+        .item-light-r { border-color: #D50000; background: radial-gradient(circle, #fff, #FFEBEE); box-shadow: 0 0 15px #D50000; animation: spin 2s infinite linear reverse; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
         .score-popup {
-            position: absolute; font-size: 40px; font-weight: 900;
+            position: absolute; font-size: 30px; font-weight: 900;
             text-shadow: 2px 2px 0 #000; pointer-events: none;
             animation: floatUp 0.8s forwards; z-index: 30;
         }
@@ -163,24 +156,27 @@
             100% { transform: translateY(-80px) scale(1.5); opacity: 0; }
         }
 
-        /* Effect Overlays */
         #slow-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 176, 255, 0.2); pointer-events: none; display: none; z-index: 5;
-            mix-blend-mode: screen;
+            background: rgba(0, 176, 255, 0.2); pointer-events: none; display: none; z-index: 5; mix-blend-mode: screen;
         }
         #flash-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: white; opacity: 0; pointer-events: none; z-index: 50;
-            transition: opacity 0.1s;
+            background: white; opacity: 0; pointer-events: none; z-index: 50; transition: opacity 0.1s;
         }
 
-        /* UI ลงทะเบียน */
+        /* UI Boxes */
         .box-style {
-            background: rgba(255, 255, 255, 0.95); padding: 30px; border-radius: 25px;
-            text-align: center; width: 85%; max-width: 400px;
+            background: rgba(255, 255, 255, 0.95); padding: 25px; border-radius: 25px;
+            text-align: center; width: 85%; max-width: 380px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.6); z-index: 30; border: 4px solid #00B0FF;
+            max-height: 90vh; overflow-y: auto;
         }
+        
+        .logo-img {
+            max-width: 150px; margin-bottom: 10px; display: block; margin-left: auto; margin-right: auto;
+        }
+        
         input, select, button {
             width: 100%; padding: 12px; margin: 8px 0; border-radius: 12px;
             border: 2px solid #ddd; font-family: 'Sarabun'; font-size: 16px; box-sizing: border-box;
@@ -188,10 +184,19 @@
         button { border: none; cursor: pointer; font-weight: bold; margin-top: 15px; }
         .btn-start { background: linear-gradient(to right, #00B0FF, #0081CB); color: white; }
         .btn-guest { background: #546E7A; color: white; }
-        
+
+        /* Tutorial Grid */
+        .tut-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 10px; text-align: left; margin-top: 10px;
+        }
+        .tut-item {
+            background: #f9f9f9; padding: 5px; border-radius: 10px; display: flex; align-items: center; font-size: 13px;
+        }
+        .tut-icon { font-size: 24px; margin-right: 8px; width: 30px; text-align: center; }
+
         .credit {
             position: absolute; bottom: 5px; width: 100%; text-align: center;
-            color: rgba(255,255,255,0.7); font-size: 14px; text-shadow: 1px 1px 2px black; z-index: 100;
+            color: rgba(255,255,255,0.7); font-size: 12px; text-shadow: 1px 1px 2px black; z-index: 100;
         }
     </style>
 </head>
@@ -206,10 +211,15 @@
     <audio id="bgm" loop>
         <source src="https://nonthaphathr.github.io/uploadimg/rainbgsong.mp3" type="audio/mpeg">
     </audio>
+    <audio id="end-sfx">
+        <source src="https://nonthaphathr.github.io/uploadimg/yehwinner.mp3" type="audio/mpeg">
+    </audio>
 
     <div id="screen-register" class="screen active">
         <div class="box-style">
-            <h1 style="color:#0081CB; margin:0 0 10px 0;">⛈️ ฝ่าพายุครุ-ลหุ</h1>
+            <img src="https://nonthaphathr.github.io/uploadimg/logokhampraphan-non.png" alt="Logo" class="logo-img">
+            
+            <h2 style="color:#0081CB; margin:0 0 10px 0;">⛈️ ฝ่าพายุครุ-ลหุ</h2>
             
             <input type="text" id="p-name" placeholder="ชื่อ-นามสกุล">
             <select id="p-class">
@@ -225,13 +235,31 @@
             
             <label style="display:block; text-align:left; color:#666; margin-top:5px; font-size:14px;">ระยะเวลาเกม:</label>
             <select id="p-time">
-                <option value="60">⏱️ 1 นาที (ปกติ)</option>
-                <option value="180">⏱️ 3 นาที (จุใจ)</option>
-                <option value="300">⏱️ 5 นาที (มาราธอน)</option>
+                <option value="60">⏱️ 1 นาที</option>
+                <option value="180">⏱️ 3 นาที</option>
+                <option value="300">⏱️ 5 นาที</option>
             </select>
             
-            <button class="btn-start" onclick="startGame(true)">ลงทะเบียนเริ่มเล่น</button>
-            <button class="btn-guest" onclick="startGame(false)">เล่นแบบไม่ลงทะเบียน</button>
+            <button class="btn-start" onclick="showTutorial(true)">ลงทะเบียนเริ่มเล่น</button>
+            <button class="btn-guest" onclick="showTutorial(false)">เล่นแบบไม่ลงทะเบียน</button>
+        </div>
+    </div>
+
+    <div id="screen-tutorial" class="screen">
+        <div class="box-style">
+            <h2 style="color:#FF9800; margin-top:0;">📖 วิธีเล่น & ไอเทม</h2>
+            <p style="font-size:14px; color:#555;">ลากตัวละครไปรับคำให้ตรงกับโจทย์!</p>
+            
+            <div class="tut-grid">
+                <div class="tut-item"><span class="tut-icon">📝</span><div>คำถูก +10<br>คำผิด -5</div></div>
+                <div class="tut-item"><span class="tut-icon">🌟</span><div>โบนัส +20</div></div>
+                <div class="tut-item"><span class="tut-icon">💣</span><div>ระเบิด -10<br>(มึนงง)</div></div>
+                <div class="tut-item"><span class="tut-icon">⏳</span><div>ช้าลง 5 วิ</div></div>
+                <div class="tut-item"><span class="tut-icon">⚡</span><div>เก็บ<b>ตัวถูก</b><br>หมดจอ</div></div>
+                <div class="tut-item"><span class="tut-icon">🌩️</span><div>เก็บ<b>ตัวผิด</b><br>หมดจอ</div></div>
+            </div>
+
+            <button class="btn-start" style="font-size:20px; padding:15px;" onclick="realStartGame()">🚀 พร้อมแล้ว! ลุยเลย</button>
         </div>
     </div>
 
@@ -267,10 +295,8 @@
     </div>
 
     <script>
-        // --- Sound System (Generated Tones) ---
-        // ใช้ AudioContext สร้างเสียงง่ายๆ เพื่อความเสถียรและไม่ต้องโหลดไฟล์เพิ่ม
+        // --- Sound System ---
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        
         function playTone(freq, type, duration) {
             if (audioCtx.state === 'suspended') audioCtx.resume();
             const osc = audioCtx.createOscillator();
@@ -279,18 +305,15 @@
             osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
             gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
             gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration);
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-            osc.start();
-            osc.stop(audioCtx.currentTime + duration);
+            osc.connect(gain); gain.connect(audioCtx.destination);
+            osc.start(); osc.stop(audioCtx.currentTime + duration);
         }
-
         function playSFX(name) {
             switch(name) {
                 case 'collect': playTone(600, 'sine', 0.1); setTimeout(()=>playTone(800, 'sine', 0.1), 50); break;
                 case 'bad': playTone(150, 'sawtooth', 0.3); break;
                 case 'bonus': playTone(400, 'square', 0.1); setTimeout(()=>playTone(600, 'square', 0.1), 100); setTimeout(()=>playTone(1000, 'square', 0.2), 200); break;
-                case 'thunder': playTone(50, 'sawtooth', 0.5); break; // เสียงฟ้าผ่า
+                case 'thunder': playTone(50, 'sawtooth', 0.5); break;
             }
         }
 
@@ -299,30 +322,16 @@
         const lahuWords = ["จะ", "ก็", "นะ", "มิ", "สิ", "ธุ", "บิ", "ดิ", "ติ", "ปริ", "ผิ", "หุ", "กะ", "ทะ", "พะ"];
 
         let gameState = {
-            score: 0,
-            timeLeft: 60,
-            initialTime: 60,
-            isPlaying: false,
-            mission: "garhu",
-            playerX: 50,
-            fallingItems: [],
-            spawnRate: 1000,
-            lastSpawn: 0,
-            speed: 0.5,
-            isSlowMotion: false,
-            slowMotionTimer: null,
+            score: 0, timeLeft: 60, initialTime: 60, isPlaying: false, mission: "garhu",
+            playerX: 50, fallingItems: [], spawnRate: 1000, lastSpawn: 0, speed: 0.5,
+            isSlowMotion: false, slowMotionTimer: null,
             specialMission: { active: false, reqGarhu: 0, reqLahu: 0, curGarhu: 0, curLahu: 0, timeLeft: 0, maxTime: 15 }
         };
         let playerInfo = {};
         let specialMissionInterval;
 
-        // --- Functions ---
-        function startGame(isRegistered) {
-            // เล่นเพลง Background
-            const bgm = document.getElementById('bgm');
-            bgm.volume = 0.4;
-            bgm.play().catch(e => console.log("Audio play failed interaction required"));
-
+        // --- Step 1: Prepare Player Info & Show Tutorial ---
+        function showTutorial(isRegistered) {
             if (isRegistered) {
                 const name = document.getElementById('p-name').value;
                 const cls = document.getElementById('p-class').value;
@@ -335,12 +344,25 @@
 
             const selectedTime = document.getElementById('p-time').value;
             gameState.initialTime = parseInt(selectedTime);
-            gameState.timeLeft = gameState.initialTime;
             
+            // Switch Screen
             document.getElementById('screen-register').classList.remove('active');
+            document.getElementById('screen-tutorial').classList.add('active');
+        }
+
+        // --- Step 2: Real Start Game ---
+        function realStartGame() {
+            // Play BGM
+            const bgm = document.getElementById('bgm');
+            bgm.volume = 0.4;
+            bgm.play().catch(e => console.log("Audio play failed"));
+
+            // Switch Screen
+            document.getElementById('screen-tutorial').classList.remove('active');
             document.getElementById('screen-game').classList.add('active');
 
-            // Reset
+            // Reset Logic
+            gameState.timeLeft = gameState.initialTime;
             gameState.score = 0;
             gameState.isPlaying = true;
             gameState.fallingItems = [];
@@ -357,6 +379,7 @@
             changeMission();
             requestAnimationFrame(gameLoop);
             
+            // Main Timer
             const timerInt = setInterval(() => {
                 if(!gameState.isPlaying) { clearInterval(timerInt); return; }
                 gameState.timeLeft--;
@@ -370,33 +393,25 @@
             }, 1000);
         }
 
-        function confirmEndGame() {
-            if(confirm("ต้องการจบเกมทันทีหรือไม่?")) endGame();
-        }
+        function confirmEndGame() { if(confirm("ต้องการจบเกมทันทีหรือไม่?")) endGame(); }
 
         function changeMission() {
             const types = ["garhu", "lahu"];
             gameState.mission = types[Math.floor(Math.random() * types.length)];
             const box = document.getElementById('mission-display');
             if(gameState.mission === "garhu") {
-                box.innerText = "🎯 เก็บคำครุ";
-                box.style.color = "#E91E63"; box.style.borderColor = "#E91E63";
+                box.innerText = "🎯 เก็บคำครุ"; box.style.color = "#E91E63"; box.style.borderColor = "#E91E63";
             } else {
-                box.innerText = "🎯 เก็บคำลหุ";
-                box.style.color = "#00C853"; box.style.borderColor = "#00C853";
+                box.innerText = "🎯 เก็บคำลหุ"; box.style.color = "#00C853"; box.style.borderColor = "#00C853";
             }
         }
 
+        // --- Special Mission ---
         function startSpecialMission() {
             const pattern = Math.floor(Math.random() * 3);
             let g = 0, l = 0;
-            if (pattern === 0) { g = 2; l = 1; }
-            else if (pattern === 1) { g = 1; l = 2; }
-            else { g = 2; l = 2; }
-
-            gameState.specialMission = {
-                active: true, reqGarhu: g, reqLahu: l, curGarhu: 0, curLahu: 0, timeLeft: 15, maxTime: 15
-            };
+            if (pattern === 0) { g = 2; l = 1; } else if (pattern === 1) { g = 1; l = 2; } else { g = 2; l = 2; }
+            gameState.specialMission = { active: true, reqGarhu: g, reqLahu: l, curGarhu: 0, curLahu: 0, timeLeft: 15, maxTime: 15 };
             updateSpecialMissionUI();
             document.getElementById('mission-display').style.opacity = '0.3';
             document.getElementById('special-mission-box').style.display = 'flex';
@@ -410,7 +425,6 @@
                 if (gameState.specialMission.timeLeft <= 0) endSpecialMission(false);
             }, 100);
         }
-
         function updateSpecialMissionUI() {
             const sm = gameState.specialMission;
             const gLeft = sm.reqGarhu - sm.curGarhu;
@@ -421,42 +435,29 @@
             if (gLeft <= 0 && lLeft <= 0) text = "สำเร็จ!";
             document.getElementById('sp-req-text').innerText = text;
         }
-
         function endSpecialMission(success) {
             clearInterval(specialMissionInterval);
             gameState.specialMission.active = false;
             document.getElementById('special-mission-box').style.display = 'none';
             document.getElementById('mission-display').style.opacity = '1';
-
-            if (success) {
-                gameState.score += 50;
-                playSFX('bonus');
-                showPopup("⚡โบนัส +50⚡", "50%", "50%", "#FFD700");
-            } else {
-                showPopup("หมดเวลาภารกิจ!", "50%", "50%", "#ccc");
-            }
+            if (success) { gameState.score += 50; playSFX('bonus'); showPopup("⚡โบนัส +50⚡", "50%", "50%", "#FFD700"); }
+            else { showPopup("หมดเวลาภารกิจ!", "50%", "50%", "#ccc"); }
             updateHUD();
         }
-
         function checkSpecialMissionProgress(type) {
             if (!gameState.specialMission.active) return false;
             let updated = false;
-            if (type === "garhu" && gameState.specialMission.curGarhu < gameState.specialMission.reqGarhu) {
-                gameState.specialMission.curGarhu++; updated = true;
-            } else if (type === "lahu" && gameState.specialMission.curLahu < gameState.specialMission.reqLahu) {
-                gameState.specialMission.curLahu++; updated = true;
-            }
+            if (type === "garhu" && gameState.specialMission.curGarhu < gameState.specialMission.reqGarhu) { gameState.specialMission.curGarhu++; updated = true; }
+            else if (type === "lahu" && gameState.specialMission.curLahu < gameState.specialMission.reqLahu) { gameState.specialMission.curLahu++; updated = true; }
             if (updated) {
                 updateSpecialMissionUI();
-                if (gameState.specialMission.curGarhu >= gameState.specialMission.reqGarhu &&
-                    gameState.specialMission.curLahu >= gameState.specialMission.reqLahu) {
-                    endSpecialMission(true);
-                }
+                if (gameState.specialMission.curGarhu >= gameState.specialMission.reqGarhu && gameState.specialMission.curLahu >= gameState.specialMission.reqLahu) endSpecialMission(true);
                 return true;
             }
             return false;
         }
 
+        // --- Game Logic ---
         function updateHUD() {
             document.getElementById('time-display').innerText = gameState.timeLeft;
             document.getElementById('score-display').innerText = gameState.score;
@@ -464,10 +465,10 @@
 
         function endGame() {
             gameState.isPlaying = false;
-            // หยุดเพลง
+            // Stop BGM & Play End SFX
             document.getElementById('bgm').pause();
-            document.getElementById('bgm').currentTime = 0;
-            
+            document.getElementById('end-sfx').play().catch(e=>console.log("End sound fail", e));
+
             clearInterval(specialMissionInterval);
             document.getElementById('screen-game').classList.remove('active');
             document.getElementById('screen-end').classList.add('active');
@@ -478,18 +479,15 @@
             `;
         }
 
-        // --- Player & Logic ---
         const playerElem = document.getElementById('player');
         document.addEventListener('touchmove', movePlayer, {passive: false});
         document.addEventListener('mousemove', movePlayer);
-
         function movePlayer(e) {
             if(!gameState.isPlaying) return;
             e.preventDefault();
             let clientX = e.touches ? e.touches[0].clientX : e.clientX;
             let percent = (clientX / window.innerWidth) * 100;
-            if(percent < 10) percent = 10;
-            if(percent > 90) percent = 90;
+            if(percent < 10) percent = 10; if(percent > 90) percent = 90;
             gameState.playerX = percent;
             playerElem.style.left = `calc(${percent}% - 60px)`;
         }
@@ -497,9 +495,7 @@
         function gameLoop(time) {
             if(!gameState.isPlaying) return;
             if(time - gameState.lastSpawn > gameState.spawnRate) {
-                spawnItem();
-                gameState.lastSpawn = time;
-                gameState.spawnRate = 700 + Math.random() * 800; 
+                spawnItem(); gameState.lastSpawn = time; gameState.spawnRate = 700 + Math.random() * 800; 
             }
             updateItems();
             requestAnimationFrame(gameLoop);
@@ -508,34 +504,22 @@
         function spawnItem() {
             const chance = Math.random();
             let type, content, className, specificClass;
-
-            // 0-6%: Bonus, 6-12%: Penalty, 12-18%: Slow, 18-20%: Yellow Bolt, 20-22%: Red Bolt
-            if (chance < 0.06) {
-                type = "bonus"; content = "🌟"; specificClass = "item-bonus special-item";
-            } else if (chance < 0.12) {
-                type = "penalty"; content = "💣"; specificClass = "item-penalty special-item";
-            } else if (chance < 0.18) {
-                type = "slow"; content = "⏳"; specificClass = "item-slow special-item";
-            } else if (chance < 0.20) {
-                type = "light-yellow"; content = "⚡"; specificClass = "item-light-y special-item";
-            } else if (chance < 0.22) {
-                type = "light-red"; content = "🌩️"; specificClass = "item-light-r special-item";
-            } else {
+            if (chance < 0.06) { type = "bonus"; content = "🌟"; specificClass = "item-bonus special-item"; }
+            else if (chance < 0.12) { type = "penalty"; content = "💣"; specificClass = "item-penalty special-item"; }
+            else if (chance < 0.18) { type = "slow"; content = "⏳"; specificClass = "item-slow special-item"; }
+            else if (chance < 0.20) { type = "light-yellow"; content = "⚡"; specificClass = "item-light-y special-item"; }
+            else if (chance < 0.22) { type = "light-red"; content = "🌩️"; specificClass = "item-light-r special-item"; }
+            else {
                 const isGarhu = Math.random() > 0.5;
                 const wordList = isGarhu ? garhuWords : lahuWords;
                 content = wordList[Math.floor(Math.random() * wordList.length)];
-                type = isGarhu ? "garhu" : "lahu";
-                specificClass = "word-item";
+                type = isGarhu ? "garhu" : "lahu"; specificClass = "word-item";
             }
-
             const el = document.createElement('div');
-            el.className = `falling-obj ${specificClass}`;
-            el.innerText = content;
+            el.className = `falling-obj ${specificClass}`; el.innerText = content;
             const startX = 10 + Math.random() * 80;
-            el.style.left = startX + "%";
-            el.style.top = "-80px"; 
+            el.style.left = startX + "%"; el.style.top = "-80px"; 
             document.getElementById('game-area').appendChild(el);
-
             gameState.fallingItems.push({ el: el, y: -10, type: type, active: true });
         }
 
@@ -544,58 +528,33 @@
             const pBox = { l: playerRect.left + 30, r: playerRect.right - 30, t: playerRect.top + 40, b: playerRect.bottom };
             let currentSpeed = gameState.speed;
             if (gameState.isSlowMotion) currentSpeed = currentSpeed * 0.5;
-
             gameState.fallingItems.forEach(item => {
                 if(!item.active) return;
-                item.y += currentSpeed;
-                item.el.style.top = item.y + "%";
+                item.y += currentSpeed; item.el.style.top = item.y + "%";
                 if(item.y > 110) { item.active = false; item.el.remove(); return; }
-
                 const itemRect = item.el.getBoundingClientRect();
-                if (pBox.l < itemRect.right && pBox.r > itemRect.left && pBox.t < itemRect.bottom && pBox.b > itemRect.top) {
-                    handleCollect(item);
-                }
+                if (pBox.l < itemRect.right && pBox.r > itemRect.left && pBox.t < itemRect.bottom && pBox.b > itemRect.top) { handleCollect(item); }
             });
         }
 
-        // === Event Trigger: Screen Flash ===
         function triggerFlash(color) {
             const flash = document.getElementById('flash-overlay');
-            flash.style.background = color;
-            flash.style.opacity = '0.8';
+            flash.style.background = color; flash.style.opacity = '0.8';
             setTimeout(() => { flash.style.opacity = '0'; }, 200);
         }
 
-        // === Event Trigger: Lightning Collection Logic ===
         function collectAllOnScreen(isBonusMode) {
-            // isBonusMode = true (Yellow Bolt): Collect Correct Words
-            // isBonusMode = false (Red Bolt): Collect Wrong Words
-            
-            let count = 0;
-            const targetType = gameState.mission; // "garhu" or "lahu"
-            
+            let count = 0; const targetType = gameState.mission;
             gameState.fallingItems.forEach(item => {
                 if(!item.active || item.type === "bonus" || item.type === "penalty" || item.type === "slow" || item.type.includes("light")) return;
-                
-                // Check if this item is a Target
                 const isCorrect = (item.type === targetType);
-                
                 let shouldCollect = false;
-                if (isBonusMode && isCorrect) shouldCollect = true; // เก็บตัวถูกให้หมด
-                if (!isBonusMode && !isCorrect) shouldCollect = true; // เก็บตัวผิดให้หมด (ลงโทษ)
-
+                if (isBonusMode && isCorrect) shouldCollect = true;
+                if (!isBonusMode && !isCorrect) shouldCollect = true;
                 if (shouldCollect) {
-                    // Trigger visual removal manually similar to handleCollect logic but simpler
-                    item.active = false;
-                    item.el.remove();
-                    
-                    if (isBonusMode) {
-                        gameState.score += 10;
-                        showPopup("+10", item.el.style.left, item.el.style.top, "#00E676");
-                    } else {
-                        if(gameState.score > 0) gameState.score -= 5;
-                        showPopup("-5", item.el.style.left, item.el.style.top, "#D32F2F");
-                    }
+                    item.active = false; item.el.remove();
+                    if (isBonusMode) { gameState.score += 10; showPopup("+10", item.el.style.left, item.el.style.top, "#00E676"); }
+                    else { if(gameState.score > 0) gameState.score -= 5; showPopup("-5", item.el.style.left, item.el.style.top, "#D32F2F"); }
                     count++;
                 }
             });
@@ -603,88 +562,31 @@
         }
 
         function handleCollect(item) {
-            item.active = false;
-            item.el.remove();
-
-            // 1. Bonus 🌟
-            if (item.type === "bonus") {
-                gameState.score += 20; playSFX('bonus');
-                showPopup("✨+20", item.el.style.left, item.el.style.top, "#FFD700");
-                return;
-            }
-            // 2. Penalty 💣
-            if (item.type === "penalty") {
-                if(gameState.score > 0) gameState.score -= 10; playSFX('bad');
-                showPopup("💥-10", item.el.style.left, item.el.style.top, "#FF3D00");
-                playerElem.style.filter = "hue-rotate(90deg) blur(2px)";
-                setTimeout(() => playerElem.style.filter = "drop-shadow(0 5px 5px rgba(0,0,0,0.5))", 500);
-                return;
-            }
-            // 3. Slow ⏳
-            if (item.type === "slow") {
-                activateSlowMotion(); playSFX('collect');
-                showPopup("⏳ ช้าลง!", item.el.style.left, item.el.style.top, "#2979FF");
-                return;
-            }
-            // 4. Lightning Yellow ⚡ (Good)
-            if (item.type === "light-yellow") {
-                playSFX('thunder');
-                triggerFlash('white');
-                const c = collectAllOnScreen(true);
-                showPopup(`⚡เก็บเรียบ ${c} ตัว!`, "50%", "50%", "#FFEB3B");
-                return;
-            }
-            // 5. Lightning Red 🌩️ (Bad)
-            if (item.type === "light-red") {
-                playSFX('thunder');
-                triggerFlash('red');
-                const c = collectAllOnScreen(false);
-                showPopup(`🌩️โดนไป ${c} ตัว!`, "50%", "50%", "#D50000");
-                return;
-            }
-
-            // Word Items
+            item.active = false; item.el.remove();
+            if (item.type === "bonus") { gameState.score += 20; playSFX('bonus'); showPopup("✨+20", item.el.style.left, item.el.style.top, "#FFD700"); return; }
+            if (item.type === "penalty") { if(gameState.score > 0) gameState.score -= 10; playSFX('bad'); showPopup("💥-10", item.el.style.left, item.el.style.top, "#FF3D00"); playerElem.style.filter = "hue-rotate(90deg) blur(2px)"; setTimeout(() => playerElem.style.filter = "drop-shadow(0 5px 5px rgba(0,0,0,0.5))", 500); return; }
+            if (item.type === "slow") { activateSlowMotion(); playSFX('collect'); showPopup("⏳ ช้าลง!", item.el.style.left, item.el.style.top, "#2979FF"); return; }
+            if (item.type === "light-yellow") { playSFX('thunder'); triggerFlash('white'); const c = collectAllOnScreen(true); showPopup(`⚡เก็บ ${c} ตัว!`, "50%", "50%", "#FFEB3B"); return; }
+            if (item.type === "light-red") { playSFX('thunder'); triggerFlash('red'); const c = collectAllOnScreen(false); showPopup(`🌩️โดน ${c} ตัว!`, "50%", "50%", "#D50000"); return; }
             if (gameState.specialMission.active) {
                 const consumed = checkSpecialMissionProgress(item.type);
-                if (consumed) {
-                    playSFX('collect');
-                    showPopup("👌 เก็บได้!", item.el.style.left, item.el.style.top, "#fff");
-                    gameState.score += 10;
-                    return; 
-                }
+                if (consumed) { playSFX('collect'); showPopup("👌 เก็บได้!", item.el.style.left, item.el.style.top, "#fff"); gameState.score += 10; return; }
             }
-
-            if(item.type === gameState.mission) {
-                gameState.score += 10; playSFX('collect');
-                showPopup("+10", item.el.style.left, item.el.style.top, "#00E676");
-                playerElem.style.transform = "scale(1.2)";
-                setTimeout(() => playerElem.style.transform = "scale(1)", 100);
-            } else {
-                if(gameState.score > 0) gameState.score -= 5; playSFX('bad');
-                showPopup("❌-5", item.el.style.left, item.el.style.top, "#D32F2F");
-                playerElem.style.opacity = "0.5";
-                setTimeout(() => playerElem.style.opacity = "1", 200);
-            }
+            if(item.type === gameState.mission) { gameState.score += 10; playSFX('collect'); showPopup("+10", item.el.style.left, item.el.style.top, "#00E676"); playerElem.style.transform = "scale(1.2)"; setTimeout(() => playerElem.style.transform = "scale(1)", 100); }
+            else { if(gameState.score > 0) gameState.score -= 5; playSFX('bad'); showPopup("❌-5", item.el.style.left, item.el.style.top, "#D32F2F"); playerElem.style.opacity = "0.5"; setTimeout(() => playerElem.style.opacity = "1", 200); }
             updateHUD();
         }
 
         function activateSlowMotion() {
             if (gameState.slowMotionTimer) clearTimeout(gameState.slowMotionTimer);
-            gameState.isSlowMotion = true;
-            document.getElementById('slow-overlay').style.display = 'block';
-            gameState.slowMotionTimer = setTimeout(() => {
-                gameState.isSlowMotion = false;
-                document.getElementById('slow-overlay').style.display = 'none';
-            }, 5000);
+            gameState.isSlowMotion = true; document.getElementById('slow-overlay').style.display = 'block';
+            gameState.slowMotionTimer = setTimeout(() => { gameState.isSlowMotion = false; document.getElementById('slow-overlay').style.display = 'none'; }, 5000);
         }
 
         function showPopup(text, x, y, color) {
-            const pop = document.createElement('div');
-            pop.className = 'score-popup';
-            pop.innerText = text;
+            const pop = document.createElement('div'); pop.className = 'score-popup'; pop.innerText = text;
             pop.style.left = x; pop.style.top = y; pop.style.color = color;
-            document.getElementById('game-area').appendChild(pop);
-            setTimeout(() => pop.remove(), 800);
+            document.getElementById('game-area').appendChild(pop); setTimeout(() => pop.remove(), 800);
         }
     </script>
 </body>
